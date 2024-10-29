@@ -15,7 +15,6 @@ const Home = () => {
         for seamless communication and collaboration. Join us and turn your
         coding dreams into reality!
       </p>
-        <Button
       <div className="space-x-4 mb-2">
         <Link to="/login">
           <Button
