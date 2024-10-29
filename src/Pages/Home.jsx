@@ -15,7 +15,6 @@ const Home = () => {
         for seamless communication and collaboration. Join us and turn your
         coding dreams into reality!
       </p>
-      <p>and need some change</p>
       <div className="space-x-4">
         <Button
           color="lightBlue"
