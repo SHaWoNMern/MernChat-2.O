@@ -5,8 +5,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Button, Input } from "@material-tailwind/react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const auth = getAuth();
+  const navigate = useNavigate();
   const [darkMode, setDarkMode] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -50,18 +54,28 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    if (Object.values(errors).some((error) => error)) {
-      toast.error("Login Failed", {
-        position: "top-center",
-        theme: darkMode ? "dark" : "light",
-        transition: Bounce,
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+        toast.success("Login Successful", {
+          position: "top-center",
+          theme: darkMode ? "dark" : "light",
+          transition: Bounce,
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        toast.error(errorMessage, {
+          position: "top-center",
+          theme: darkMode ? "dark" : "light",
+          transition: Bounce,
+        });
       });
-    } else {
-      toast.success("Login Successful", {
-        position: "top-center",
-        theme: darkMode ? "dark" : "light",
-        transition: Bounce,
-      });
+    if (!errors.email && !errors.password) {
       setEmail("");
       setPassword("");
       setErrors({ email: false, password: false });

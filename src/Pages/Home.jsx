@@ -15,21 +15,26 @@ const Home = () => {
         for seamless communication and collaboration. Join us and turn your
         coding dreams into reality!
       </p>
-      <div className="space-x-4">
         <Button
-          color="lightBlue"
-          size="lg"
-          className="animate-bounce hover:bg-blue-800"
-        >
-          <Link to="/login">Login</Link>
-        </Button>
-        <Button
-          color="lightBlue"
-          size="lg"
-          className="animate-bounce hover:bg-blue-800"
-        >
-          <Link to="/registration">Register</Link>
-        </Button>
+      <div className="space-x-4 mb-2">
+        <Link to="/login">
+          <Button
+            color="lightBlue"
+            size="lg"
+            className="animate-bounce hover:bg-blue-800"
+          >
+            Login
+          </Button>
+        </Link>
+        <Link to="/registration">
+          <Button
+            color="lightBlue"
+            size="lg"
+            className="animate-bounce hover:bg-blue-800"
+          >
+            Register
+          </Button>
+        </Link>
       </div>
     </div>
   );

@@ -5,8 +5,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Button, Input } from "@material-tailwind/react";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  sendEmailVerification,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
+  const auth = getAuth();
+  const navigate = useNavigate();
   const [darkMode, setDarkMode] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -64,7 +73,7 @@ const Registration = () => {
     }
   };
 
-  const handleLogin = () => {
+  const handleRegistration = () => {
     if (Object.values(errors).some((error) => error)) {
       toast.error("Registration Failed", {
         position: "top-center",
@@ -72,16 +81,60 @@ const Registration = () => {
         transition: Bounce,
       });
     } else {
-      toast.success("Registration Successful", {
-        position: "top-center",
-        theme: darkMode ? "dark" : "light",
-        transition: Bounce,
-      });
-      setEmail("");
-      setPassword("");
-      setName("");
-      setNumber("");
-      setErrors({ email: false, password: false, name: false, number: false });
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          updateProfile(auth.currentUser, {
+            email: email,
+            displayName: name,
+            phoneNumber: number,
+            photoURL:
+              "https://templates.joomla-monster.com/joomla30/jm-news-portal/components/com_djclassifieds/assets/images/default_profile.png",
+          })
+            .then(() => {
+              sendEmailVerification(auth.currentUser);
+              toast.success("Profile Updated", {
+                position: "top-center",
+                theme: darkMode ? "dark" : "light",
+                transition: Bounce,
+              });
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              toast.error(errorMessage, {
+                position: "top-center",
+                theme: darkMode ? "dark" : "light",
+                transition: Bounce,
+              });
+            });
+          const user = userCredential.user;
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
+          toast.success("Registration Successful", {
+            position: "top-center",
+            theme: darkMode ? "dark" : "light",
+            transition: Bounce,
+          });
+          setEmail("");
+          setPassword("");
+          setName("");
+          setNumber("");
+          setErrors({
+            email: false,
+            password: false,
+            name: false,
+            number: false,
+          });
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          toast.error(errorMessage, {
+            position: "top-center",
+            theme: darkMode ? "dark" : "light",
+            transition: Bounce,
+          });
+        });
     }
   };
 
@@ -230,10 +283,10 @@ const Registration = () => {
             )}
           </div>
 
-          {/* Login Button */}
+          {/* Registration Button */}
           <Button
             color="blue"
-            onClick={handleLogin}
+            onClick={handleRegistration}
             disabled={!email || !password}
             className="w-full py-3 mt-4 bg-blue-500 text-white font-bold rounded hover:bg-blue-600 focus:outline-none disabled:bg-blue-300"
           >
@@ -241,7 +294,7 @@ const Registration = () => {
           </Button>
 
           <hr className="my-6 border-gray-300 w-full" />
-          {/* Google Login Button */}
+          {/* Google Registration Button */}
           <Button
             size="lg"
             variant="outlined"
