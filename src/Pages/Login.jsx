@@ -58,7 +58,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setTimeout(() => {
-          navigate("/");
+          navigate("/chathome");
         }, 2000);
         toast.success("Login Successful", {
           position: "top-center",

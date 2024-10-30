@@ -99,7 +99,6 @@ const Registration = () => {
               });
             })
             .catch((error) => {
-              const errorCode = error.code;
               const errorMessage = error.message;
               toast.error(errorMessage, {
                 position: "top-center",
@@ -109,7 +108,7 @@ const Registration = () => {
             });
           const user = userCredential.user;
           setTimeout(() => {
-            navigate("/login");
+            navigate("/");
           }, 2000);
           toast.success("Registration Successful", {
             position: "top-center",
