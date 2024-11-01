@@ -9,8 +9,13 @@ const LottieAnimation = () => (
 );
 function Loading() {
   return (
-    <div className="fixed inset-0 flex items-center justify-center animate-slideIn">
-      <LottieAnimation />
+    <div>
+      <div className="fixed inset-0 flex items-center justify-center animate-bounce">
+        <LottieAnimation />
+        <h1 className="text-3xl font-bold block">
+          Hang tight—your chat is loading!
+        </h1>
+      </div>
     </div>
   );
 }

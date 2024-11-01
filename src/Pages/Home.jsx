@@ -15,7 +15,6 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 const Home = () => {
-  
   // firebase --------------
   const auth = getAuth();
 
@@ -36,16 +35,12 @@ const Home = () => {
     number: false,
   });
 
-
-
   // boolean ---------------------------
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
   const toggleForm = () => {
     setIsRegistering(!isRegistering);
   };
-
-
 
   // form handle functions-----------------------------------
   const validateField = (field, value) => {
@@ -81,8 +76,6 @@ const Home = () => {
     }
   };
 
-
-
   // Login------------------------------------------------------
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
@@ -111,8 +104,6 @@ const Home = () => {
       setErrors({ email: false, password: false });
     }
   };
-
-
 
   // Registration------------------------------------------------------
   const handleRegistration = () => {
@@ -193,7 +184,7 @@ const Home = () => {
             alt="Logo"
             className="w-1/4 animate-fadeIn mt-10"
           />
-          <p className="text-3xl mt-7 slideIn-delay font-oxanium">
+          <p className="text-3xl mt-7 slideIn-delay font-oxanium mb-10">
             where developers unite
           </p>
           <ToastContainer
@@ -204,12 +195,14 @@ const Home = () => {
             limit={1}
           />
           {/* ---------------- header --------------- */}
+
+          {/* ---------------- Banner --------------- */}
           <div className="flex justify-between w-full">
-            <div className="w-2/3 h-2/3 px-5 animate-bounce">
+            <div className="w-1/2 px-5 animate-bounce">
               <img src="banner.png" alt="" className="mt-20" />
             </div>
             <div
-              className={`w-1/3 lg:w-1/3 md:w-1/3 shadow-lg rounded-xl overflow-hidden items-center my-auto mr-20 opacity-90 ${
+              className={`w-1/3 lg:w-1/3 md:w-1/3 pl-5 ml-10 shadow-lg rounded-xl overflow-hidden items-center my-auto mr-20 opacity-90 ${
                 darkMode ? "bg-gray-900" : "bg-white"
               } `}
             >
@@ -405,48 +398,6 @@ const Home = () => {
               </div>
             </div>
           </div>
-
-          {/* -----------Lottie Animations----------- */}
-          <div className="flex justify-between w-full">
-            <div className="w-1/2"></div>
-            <div className=" inline-flex w-1/2 justify-center gap-10 pl-36">
-              <div className="flex flex-col items-center w-1/5">
-                <LottieAnimation
-                  animationKey="interface"
-                  width="150px"
-                  height="150px"
-                  loop={true}
-                />{" "}
-                <h2 className="text-xl font-bold text-center">
-                  Join Us Our, Mern Stack Community
-                </h2>
-              </div>
-              <div className="flex flex-col items-center w-1/5">
-                <LottieAnimation
-                  animationKey="developer"
-                  width="150px"
-                  height="150px"
-                  loop={true}
-                />{" "}
-                <h2 className="text-xl font-bold text-center ">
-                  Connect, Code, Collabrate!
-                </h2>
-              </div>
-              <div className="flex flex-col items-center w-1/5">
-                <LottieAnimation
-                  animationKey="user"
-                  width="150px"
-                  height="150px"
-                  loop={true}
-                />{" "}
-                <h2 className="text-xl font-bold text-center">
-                  You're, just One Tap <br />
-                  away
-                </h2>
-              </div>
-            </div>
-          </div>
-          {/* -----------Lottie Animations----------- */}
         </div>
       </div>
     </>
