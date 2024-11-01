@@ -12,20 +12,18 @@
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-
-/* Class for delayed slideIn animation */
 .slideIn {
   animation: slideIn 1.5s ease-out forwards;
 }
 
 .slideIn-delay {
   animation: slideIn 1.5s ease-out forwards;
-  animation-delay: 0.5s; /* Set the delay to half a second */
+  animation-delay: 0.5s;
 }
 @keyframes bounce {
   0%,
   100% {
-    transform: translateY(-2%);
+    transform: translateY(-3%);
   }
   50% {
     transform: translateY(-1%);
