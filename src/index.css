@@ -1,24 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* src/index.css */
+
+/* ---------------Animation--------------------- */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 @keyframes blink {
   50% {
     border-color: transparent;
   }
 }
-
 @keyframes slideIn {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-.slideIn {
-  animation: slideIn 1.5s ease-out forwards;
-}
-
-.slideIn-delay {
-  animation: slideIn 1.5s ease-out forwards;
-  animation-delay: 0.5s;
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 @keyframes bounce {
   0%,
@@ -37,7 +43,32 @@
     opacity: 1;
   }
 }
-
 .animate-fadeIn {
   animation: fadeIn 1.5s ease-in-out forwards;
 }
+.rotate {
+  animation: rotate 1.5s ease-in-out;
+}
+.blink {
+  animation: blink 1.5s ease-in-out;
+}
+.slideIn {
+  animation: slideIn 1.5s ease-out forwards;
+}
+.slideIn-delay {
+  animation: slideIn 1.5s ease-out forwards;
+  animation-delay: 0.5s;
+}
+/* ---------------Animation--------------------- */
+
+/* -----------------custom Style ------------------ */
+
+@layer components {
+  .navbutton {
+    @apply relative flex items-center justify-center hover:text-blue-900 rounded-xl py-3 transition-all duration-300;
+  }
+  .navspan {
+    @apply absolute left-[-10px] top-14 bottom-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-2xl;
+  }
+}
+/* -----------------custom Style ------------------ */

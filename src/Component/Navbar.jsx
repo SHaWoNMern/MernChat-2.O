@@ -1,81 +1,108 @@
-import React from "react";
+import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { Link } from "react-router-dom";
+
 const Navbar = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
-    <>
-      <div className="flex items-center min-h-screen pl-3">
-        <nav className="bg-gray-800 text-white flex flex-col justify-between p-4 w-auto h-auto items-center rounded-2xl transition-all duration-300 hover:pr-40">
-          <div className="flex flex-col items-center pb-20">
-            <div className="relative ">
-              <img
-                src="dummypp.png"
-                alt="Profile"
-                className="w-10 h-10 rounded-full border-2 border-white overflow-hidden"
+    <div
+      className={`flex items-center min-h-screen ${
+        darkMode
+          ? "bg-gray-900 text-white"
+          : "bg-gradient-to-br from-white via-gray-200 to-[#f2fbfc]"
+      }`}
+    >
+      <nav
+        className={`relative ${
+          darkMode
+            ? "bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600"
+            : "bg-gradient-to-br from-light-blue to-soft-blue"
+        } flex flex-col justify-between p-6 w-24 h-auto items-center rounded-2xl transition-all duration-300 hover:bg-gradient-to-br hover:from-soft-blue hover:to-light-blue hover:w-36 ml-6`}
+      >
+        {/* Profile Section */}
+        <div className="flex flex-col items-center mb-10">
+          <div className="relative">
+            <img
+              src="dummypp.png"
+              alt="Profile"
+              className="w-10 h-10 rounded-full border-2 border-white overflow-hidden"
+            />
+            <span className="absolute top-0 right-0 w-3 h-3 bg-green-500 rounded-full"></span>
+          </div>
+          <span className="mt-2">MernChat</span>
+        </div>
+
+        {/* Nav Items */}
+        <div className="flex flex-col gap-10">
+          {/* ------- Home Icon ---------- */}
+          <button className="group navbutton">
+            <Link to="/" className="flex items-center">
+              <i className="fas fa-home text-4xl"></i>
+              <span className="navspan left-[18px]">Home</span>
+            </Link>
+          </button>
+
+          {/* Messages Icon with Tooltip */}
+          <button className="group navbutton">
+            <Link to="/" className="flex items-center">
+              <i className="fas fa-comment text-4xl"></i>
+              <span className="navspan left-[-8px]">Messages</span>
+            </Link>
+          </button>
+
+          {/* Notifications Icon with Tooltip */}
+          <button className="group navbutton">
+            <Link to="/notifications" className="flex items-center">
+              <i className="fas fa-bell text-4xl"></i>
+              <span className="navspan left-[-20px]">Notifications</span>
+            </Link>
+          </button>
+
+          {/* Settings Icon with Tooltip */}
+          <button className="group navbutton">
+            <Link to="/settings" className="flex items-center">
+              <i className="fas fa-cog text-4xl"></i>
+              <span className="navspan left-2">Settings</span>
+            </Link>
+          </button>
+
+          {/* Dark Mode Toggle */}
+          <div className="mt-6 flex items-center justify-center">
+            <span className="mr-2">
+              {darkMode ? "Light Mode" : "Dark Mode"}
+            </span>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={darkMode}
+                onChange={() => setDarkMode(!darkMode)}
+                className="sr-only peer"
               />
-              <span className="absolute top-0 right-0 w-3 h-3 bg-green-500 rounded-full"></span>
-            </div>
-            <span className="ml-2 text-lg">MernChat</span>
+              <div
+                className={`w-10 h-5 rounded-full ${
+                  darkMode ? "bg-gray-600" : "bg-gray-200"
+                }`}
+              >
+                <div
+                  className={`w-5 h-5 bg-white rounded-full shadow transform transition-transform ${
+                    darkMode ? "translate-x-5" : "translate-x-0"
+                  }`}
+                ></div>
+              </div>
+            </label>
           </div>
-          <div className="flex flex-col text-4xl gap-16">
-            {/* Home Icon with Tooltip */}
-            <div className="relative group">
-              <Link to="/" className="hover:text-gray-400">
-                <i className="fas fa-home "></i>
-              </Link>
-              <span className="absolute left-full ml-2 bg-gray-700 text-white p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                Home
-              </span>
-            </div>
-            {/* Messages Icon with Tooltip */}
-            <div className="relative group">
-              <Link to="/messages" className="hover:text-gray-400">
-                <i className="fas fa-comment"></i>
-              </Link>
-              <span className="absolute left-full ml-2 bg-gray-700 text-white p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                Messages
-              </span>
-            </div>
-            {/* Notifications Icon with Tooltip */}
-            <div className="relative group">
-              <Link to="/notifications" className="hover:text-gray-400">
-                <i className="fas fa-bell"></i>
-              </Link>
-              <span className="absolute left-full ml-2 bg-gray-700 text-white p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                Notifications
-              </span>
-            </div>
-            {/* Settings Icon with Tooltip */}
-            <div className="relative group">
-              <Link to="/settings" className="hover:text-gray-400">
-                <i className="fas fa-cog"></i>
-              </Link>
-              <span className="absolute left-full ml-2 bg-gray-700 text-white p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                Settings
-              </span>
-            </div>
-            {/* Slack Icon with Tooltip */}
-            <div className="relative group">
-              <Link className="hover:text-gray-400">
-                <i className="fa-brands fa-slack"></i>
-              </Link>
-              <span className="absolute left-full ml-2 bg-gray-700 text-white p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                Slack
-              </span>
-            </div>
-            {/* Logout Icon with Tooltip */}
-            <div className="relative group pb-10 pt-20">
-              <Link to="/logout" className="hover:text-gray-400 ">
-                <i className="fas fa-sign-out-alt"></i>
-              </Link>
-              <span className=" absolute left-full ml-2 bg-gray-700 text-white p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                Logout
-              </span>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </>
+
+          {/* Logout Icon with Tooltip */}
+          <button className="group navbutton pb-5">
+            <Link to="/logout" className="flex items-center">
+              <i className="fas fa-sign-out-alt text-4xl"></i>
+              <span className="navspan left-[-20px]">Logout</span>
+            </Link>
+          </button>
+        </div>
+      </nav>
+    </div>
   );
 };
 

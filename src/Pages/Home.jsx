@@ -174,17 +174,18 @@ const Home = () => {
     <>
       {/* ---------------- header --------------- */}
       <div
-        className={`font-poppins min-h-screen flex flex-col items-center w-full h-full ${
+        className={`font-poppins min-h-screen flex flex-col items-center w-full h-full bg-cover bg-inherit ${
           darkMode ? "bg-dark-image text-white" : "bg-light-image text-gray-900"
         }`}
       >
-        <div className="flex flex-col items-center w-[1720px]">
+        <div className="flex flex-col items-center w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
+          {/* Logo */}
           <img
             src="Logo.png"
             alt="Logo"
-            className="w-1/4 animate-fadeIn mt-10"
+            className="w-1/2 sm:w-1/3 md:w-1/4 animate-fadeIn mt-10"
           />
-          <p className="text-3xl mt-7 slideIn-delay font-oxanium mb-10">
+          <p className="text-2xl sm:text-3xl mt-4 sm:mt-7 slideIn-delay font-oxanium mb-5 sm:mb-10">
             where developers unite
           </p>
           <ToastContainer
@@ -194,26 +195,28 @@ const Home = () => {
             transition={Bounce}
             limit={1}
           />
-          {/* ---------------- header --------------- */}
 
-          {/* ---------------- Banner --------------- */}
-          <div className="flex justify-between w-full">
-            <div className="w-1/2 px-5 animate-bounce">
-              <img src="banner.png" alt="" className="mt-20" />
+          {/* Banner and Form */}
+          <div className="flex flex-col lg:flex-row justify-between w-full mt-10 lg:mt-16">
+            {/* Banner */}
+            <div className="flex justify-center lg:justify-start w-full lg:w-1/2 lg:pl-12 animate-bounce">
+              <img
+                src="banner.png"
+                alt="Banner"
+                className="w-3/4 md:w-2/3 lg:w-full mt-6 lg:mt-20"
+              />
             </div>
+
+            {/* Login / Registration Form */}
             <div
-              className={`w-1/3 lg:w-1/3 md:w-1/3 pl-5 ml-10 shadow-lg rounded-xl overflow-hidden items-center my-auto mr-20 opacity-90 ${
+              className={`w-full lg:w-2/3 max-w-md mx-auto lg:mx-0 shadow-lg rounded-xl p-5 lg:p-8 mt-8 lg:mt-0 bg-opacity-90 ${
                 darkMode ? "bg-gray-900" : "bg-white"
-              } `}
+              }`}
             >
-              <div
-                className={`w-full md:w-full p-6 md:p-12 ${
-                  darkMode ? "bg-gray-900" : "bg-white"
-                }`}
-              >
-                {/* ---------login card Heading----------- */}
+              <div>
+                {/* Header */}
                 <h1
-                  className={`text-2xl md:text-3xl font-bold mb-6 ${
+                  className={`text-2xl md:text-3xl font-bold mb-4 sm:mb-6 ${
                     darkMode ? "text-white" : "text-gray-900"
                   } animate-slideIn`}
                 >
@@ -222,14 +225,14 @@ const Home = () => {
                     : "Login To Start Collaborating!"}
                 </h1>
                 <h3
-                  className={`text-lg md:text-xl mb-7 ${
+                  className={`text-lg md:text-xl mb-5 sm:mb-7 ${
                     darkMode ? "text-gray-300" : "text-gray-700"
                   } animate-slideIn`}
                 >
                   It's Free to Use
                 </h3>
 
-                {/* ---------Registration Form----------- */}
+                {/* Registration Form */}
                 <div
                   className={`transition-all duration-500 ease-in-out overflow-hidden ${
                     isRegistering
@@ -275,9 +278,8 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-                {/* ---------Registration Form----------- */}
 
-                {/* -----------Login Form--------------- */}
+                {/* Login Form */}
                 <div className="mb-4">
                   <Input
                     color={darkMode ? "white" : "blue"}
@@ -309,7 +311,7 @@ const Home = () => {
                   />
                   <button
                     onClick={handleClickShowPassword}
-                    className="absolute lg:right-3 lg:top-3 sm:right-1 sm:top-1 text-gray-500 focus:outline-none"
+                    className="absolute right-3 top-3 text-gray-500 focus:outline-none"
                   >
                     {showPassword ? (
                       <FontAwesomeIcon icon={faEyeSlash} className="text-xl" />
@@ -317,7 +319,6 @@ const Home = () => {
                       <FontAwesomeIcon icon={faEye} className="text-xl" />
                     )}
                   </button>
-
                   {errors.password && (
                     <p className="text-red-500 text-xs mt-1">
                       Password must be at least 8 characters long
@@ -325,7 +326,7 @@ const Home = () => {
                   )}
                 </div>
 
-                {/* ---------Buttons----------- */}
+                {/* Buttons */}
                 <Button
                   color="blue"
                   onClick={isRegistering ? handleRegistration : handleLogin}
@@ -343,7 +344,7 @@ const Home = () => {
                 >
                   <img
                     src="https://docs.material-tailwind.com/icons/google.svg"
-                    alt="metamask"
+                    alt="Google"
                     className="h-6 w-6"
                   />
                   Continue with Google
@@ -363,9 +364,8 @@ const Home = () => {
                     {isRegistering ? "Sign In" : "Sign Up"}
                   </button>
                 </div>
-                {/* ---------Buttons----------- */}
 
-                {/* ---------Dark Mode----------- */}
+                {/* Dark Mode Toggle */}
                 <div className="mt-6 flex items-center justify-center">
                   <span className="mr-2">
                     {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
@@ -378,23 +378,18 @@ const Home = () => {
                       className="sr-only peer"
                     />
                     <div
-                      className={`w-[40px] h-5 rounded-full peer-focus:outline-none peer-focus:ring-2 ${
-                        darkMode
-                          ? "bg-gray-600 peer-focus:ring-blue-800"
-                          : "bg-gray-200 peer-focus:ring-blue-500"
+                      className={`w-10 h-5 rounded-full ${
+                        darkMode ? "bg-gray-600" : "bg-gray-200"
                       }`}
                     >
                       <div
-                        className={`w-5 h-5 rounded-full shadow transform transition-transform duration-300 ease-in-out ${
-                          darkMode
-                            ? "bg-gray-300 translate-x-5"
-                            : "bg-white translate-x-0"
+                        className={`w-5 h-5 bg-white rounded-full shadow transform transition-transform ${
+                          darkMode ? "translate-x-5" : "translate-x-0"
                         }`}
                       ></div>
                     </div>
                   </label>
                 </div>
-                {/* ---------Dark Mode----------- */}
               </div>
             </div>
           </div>
