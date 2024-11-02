@@ -47,7 +47,7 @@
   animation: fadeIn 1.5s ease-in-out forwards;
 }
 .rotate {
-  animation: rotate 1.5s ease-in-out;
+  animation: rotateOnce 0.5s ease-in-out 1;
 }
 .blink {
   animation: blink 1.5s ease-in-out;
@@ -68,7 +68,13 @@
     @apply relative flex items-center justify-center hover:text-blue-900 rounded-xl py-3 transition-all duration-300;
   }
   .navspan {
-    @apply absolute left-[-10px] top-14 bottom-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-2xl;
+    @apply absolute top-14 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-2xl;
+  }
+  .light {
+    @apply bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600 hover:bg-gradient-to-br hover:from-gray-600 hover:via-gray-700 hover:to-gray-800;
+  }
+  .dark {
+    @apply bg-gradient-to-br from-light-blue to-soft-blue hover:bg-gradient-to-br hover:from-soft-blue hover:to-light-blue;
   }
 }
 /* -----------------custom Style ------------------ */

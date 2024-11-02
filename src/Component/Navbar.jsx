@@ -16,11 +16,11 @@ const Navbar = () => {
       <nav
         className={`relative ${
           darkMode
-            ? "bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600"
-            : "bg-gradient-to-br from-light-blue to-soft-blue"
-        } flex flex-col justify-between p-6 w-24 h-auto items-center rounded-2xl transition-all duration-300 hover:bg-gradient-to-br hover:from-soft-blue hover:to-light-blue hover:w-36 ml-6`}
+            ? "light"
+            : "dark"
+        } flex flex-col justify-between p-6 w-24 h-auto items-center rounded-2xl transition-all duration-300 hover:w-36 ml-6`}
       >
-        {/* Profile Section */}
+        {/* --------------- Profile Section --------------- */}
         <div className="flex flex-col items-center mb-10">
           <div className="relative">
             <img
@@ -39,40 +39,40 @@ const Navbar = () => {
           <button className="group navbutton">
             <Link to="/" className="flex items-center">
               <i className="fas fa-home text-4xl"></i>
-              <span className="navspan left-[18px]">Home</span>
+              <span className="navspan">Home</span>
             </Link>
           </button>
 
-          {/* Messages Icon with Tooltip */}
+          {/* -------------- Messages Icon ------------- */}
           <button className="group navbutton">
             <Link to="/" className="flex items-center">
               <i className="fas fa-comment text-4xl"></i>
-              <span className="navspan left-[-8px]">Messages</span>
+              <span className="navspan">Messages</span>
             </Link>
           </button>
 
-          {/* Notifications Icon with Tooltip */}
+          {/* ---------------Notifications Icon with Tooltip-------------------- */}
           <button className="group navbutton">
             <Link to="/notifications" className="flex items-center">
               <i className="fas fa-bell text-4xl"></i>
-              <span className="navspan left-[-20px]">Notifications</span>
+              <span className="navspan">Notifications</span>
             </Link>
           </button>
 
-          {/* Settings Icon with Tooltip */}
+          {/* ----------------Settings Icon------------- */}
           <button className="group navbutton">
             <Link to="/settings" className="flex items-center">
-              <i className="fas fa-cog text-4xl"></i>
-              <span className="navspan left-2">Settings</span>
+              <i className="fas fa-cog text-4xl hover:animate-rotate"></i>
+              <span className="navspan">Settings</span>
             </Link>
           </button>
 
-          {/* Dark Mode Toggle */}
-          <div className="mt-6 flex items-center justify-center">
-            <span className="mr-2">
+          {/* ------------------Dark Mode Toggle----------------- */}
+          <div className="mt-6 flex flex-col items-center justify-center">
+            <div className="mb-2 font-bold font-oxanium text-center">
               {darkMode ? "Light Mode" : "Dark Mode"}
-            </span>
-            <label className="relative inline-flex items-center cursor-pointer">
+            </div>
+            <label className="relative flex items-center cursor-pointer">
               <input
                 type="checkbox"
                 checked={darkMode}
@@ -93,11 +93,11 @@ const Navbar = () => {
             </label>
           </div>
 
-          {/* Logout Icon with Tooltip */}
+          {/* ----------------Logout-------------- */}
           <button className="group navbutton pb-5">
             <Link to="/logout" className="flex items-center">
               <i className="fas fa-sign-out-alt text-4xl"></i>
-              <span className="navspan left-[-20px]">Logout</span>
+              <span className="navspan">Logout</span>
             </Link>
           </button>
         </div>
