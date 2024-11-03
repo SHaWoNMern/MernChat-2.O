@@ -10,17 +10,6 @@ import RootLayout from "./Pages/RootLayout";
 import Loading from "./Component/Loading";
 import Navbar from "./Component/Navbar";
 import HomePage from "./Pages/HomePAge";
-import {
-  AxiosProvider,
-  Request,
-  Get,
-  Delete,
-  Head,
-  Post,
-  Put,
-  Patch,
-  withAxios,
-} from "react-axios";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

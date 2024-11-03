@@ -8,15 +8,13 @@ const Navbar = () => {
   return (
     <div
       className={`flex items-center min-h-screen ${
-        darkMode
-          ? "bg-gradient-to-br from-gray-600 via-gray-500 to-gray-800 text-white"
-          : "bg-gradient-to-br from-white via-gray-200 to-[#f2fbfc]"
+        darkMode ? "bg-light-image" : "bg-light-image"
       }`}
     >
       <nav
         className={`relative ${
-          darkMode ? "light" : "dark"
-        } flex flex-col justify-between p-6 w-24 h-auto items-center rounded-2xl transition-all duration-300 hover:w-36 ml-6`}
+          darkMode ? "lightMode" : "darkMode"
+        } flex flex-col justify-between p-6 w-24 h-auto items-center text-grey-900 font-oxanium rounded-2xl transition-all duration-300 hover:w-36 ml-6 shadow-md shadow-blue-900`}
       >
         {/* --------------- Profile Section --------------- */}
         <div className="flex flex-col items-center mb-10">
@@ -28,7 +26,7 @@ const Navbar = () => {
             />
             <span className="absolute top-0 right-0 w-3 h-3 bg-green-500 rounded-full"></span>
           </div>
-          <span className="mt-2">MernChat</span>
+          <span className="mt-2 text-lg font-bold">MernChat</span>
         </div>
 
         {/* Nav Items */}
@@ -79,7 +77,7 @@ const Navbar = () => {
               />
               <div
                 className={`w-10 h-5 rounded-full ${
-                  darkMode ? "bg-gray-600" : "bg-gray-200"
+                  darkMode ? "bg-gray-900" : "bg-gray-900"
                 }`}
               >
                 <div

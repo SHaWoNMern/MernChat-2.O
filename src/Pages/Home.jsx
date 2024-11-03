@@ -173,7 +173,7 @@ const Home = () => {
     <>
       {/* ---------------- header --------------- */}
       <div
-        className={`font-poppins min-h-screen flex flex-col items-center w-full h-full bg-cover bg-inherit ${
+        className={`font-poppins min-h-screen flex flex-col items-center w-full h-full bg-cover ${
           darkMode ? "bg-dark-image text-white" : "bg-light-image text-gray-900"
         }`}
       >
