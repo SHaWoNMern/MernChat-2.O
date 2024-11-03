@@ -6,7 +6,6 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Button, Input } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import LottieAnimation from "../Component/LottieAnimation";
 import {
   getAuth,
   createUserWithEmailAndPassword,

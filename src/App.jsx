@@ -6,17 +6,28 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from "./Pages/Home";
-import ChatHome from "./Pages/ChatHome";
 import RootLayout from "./Pages/RootLayout";
 import Loading from "./Component/Loading";
 import Navbar from "./Component/Navbar";
+import HomePage from "./Pages/HomePAge";
+import {
+  AxiosProvider,
+  Request,
+  Get,
+  Delete,
+  Head,
+  Post,
+  Put,
+  Patch,
+  withAxios,
+} from "react-axios";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
-      <Route path="/chathome" element={<ChatHome />} />
       <Route path="/navbar" element={<Navbar />} />
+      <Route path="/homepage" element={<HomePage />} />
     </Route>
   )
 );

@@ -34,9 +34,9 @@ const Navbar = () => {
         {/* Nav Items */}
         <div className="flex flex-col gap-10">
           {/* ------- Home Icon ---------- */}
-          <button className="group navbutton">
+          <button className="group navbutton ">
             <Link to="/" className="flex items-center">
-              <i className="fas fa-home text-4xl"></i>
+              <i className="fas fa-home text-4xl hover:animate-rotate"></i>
               <span className="navspan">Home</span>
             </Link>
           </button>
@@ -44,7 +44,7 @@ const Navbar = () => {
           {/* -------------- Messages Icon ------------- */}
           <button className="group navbutton">
             <Link to="/" className="flex items-center">
-              <i className="fas fa-comment text-4xl"></i>
+              <i className="fas fa-comment text-4xl hover:animate-rotate"></i>
               <span className="navspan">Messages</span>
             </Link>
           </button>
@@ -52,7 +52,7 @@ const Navbar = () => {
           {/* ---------------Notifications Icon with Tooltip-------------------- */}
           <button className="group navbutton">
             <Link to="/notifications" className="flex items-center">
-              <i className="fas fa-bell text-4xl"></i>
+              <i className="fas fa-bell text-4xl hover:animate-rotate"></i>
               <span className="navspan">Notifications</span>
             </Link>
           </button>
@@ -94,7 +94,7 @@ const Navbar = () => {
           {/* ----------------Logout-------------- */}
           <button className="group navbutton pb-5">
             <Link to="/logout" className="flex items-center">
-              <i className="fas fa-sign-out-alt text-4xl"></i>
+              <i className="fas fa-sign-out-alt text-4xl hover:animate-slideIn"></i>
               <span className="navspan">Logout</span>
             </Link>
           </button>

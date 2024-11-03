@@ -12,7 +12,7 @@ module.exports = withMT({
         "soft-yellow": "#fff9c4",
       },
       animation: {
-        rotate: "rotate 1.5s ease-in-out infinite",
+        rotate: "rotate 0.5s ease-in-out",
         fadeIn: "fadeIn 0.3s ease-in-out forwards",
         fadeOut: "fadeOut 0.3s ease-in-out forwards",
         slideIn: "slideIn 0.5s ease-out forwards",
@@ -21,7 +21,7 @@ module.exports = withMT({
       keyframes: {
         rotate: {
           "0%, 100%": { transform: "rotate(0deg)" },
-          "50%": { transform: "rotate(180deg)" },
+          "50%": { transform: "rotate(50deg)" },
         },
         fadeIn: {
           "0%": { opacity: "0", transform: "scale(0.95)" },
