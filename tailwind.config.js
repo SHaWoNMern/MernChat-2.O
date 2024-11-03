@@ -1,20 +1,15 @@
 const withMT = require("@material-tailwind/react/utils/withMT");
 
-module.exports =
- withMT({
+module.exports = withMT({
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-          'light-blue': '#e0f7fa',
-          'soft-pink': '#f8bbd0',
-          "soft-green": "#c8e6c9",
-          "soft-blue": "#bbdefb",
-          "soft-yellow": "#fff9c4",
-          "soft-pink": "#f8bbd0",
-          "soft-green": "#c8e6c9",
-          "soft-blue": "#bbdefb",
-          "soft-yellow": "#fff9c4",
+        "light-blue": "#e0f7fa",
+        "soft-pink": "#f8bbd0",
+        "soft-green": "#c8e6c9",
+        "soft-blue": "#bbdefb",
+        "soft-yellow": "#fff9c4",
       },
       animation: {
         rotate: "rotate 1.5s ease-in-out infinite",
@@ -49,7 +44,7 @@ module.exports =
       backgroundImage: {
         "dark-image": "url('dark-bg.png')",
         "light-image": "url('light-1.jpg')",
-        "login-left": "url('Login_left.png')",
+        "nav-dark": "url('nav-dark.jpg')",
       },
     },
   },

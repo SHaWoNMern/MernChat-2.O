@@ -9,15 +9,13 @@ const Navbar = () => {
     <div
       className={`flex items-center min-h-screen ${
         darkMode
-          ? "bg-gray-900 text-white"
+          ? "bg-gradient-to-br from-gray-600 via-gray-500 to-gray-800 text-white"
           : "bg-gradient-to-br from-white via-gray-200 to-[#f2fbfc]"
       }`}
     >
       <nav
         className={`relative ${
-          darkMode
-            ? "light"
-            : "dark"
+          darkMode ? "light" : "dark"
         } flex flex-col justify-between p-6 w-24 h-auto items-center rounded-2xl transition-all duration-300 hover:w-36 ml-6`}
       >
         {/* --------------- Profile Section --------------- */}

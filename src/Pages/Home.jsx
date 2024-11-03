@@ -82,7 +82,7 @@ const Home = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setTimeout(() => {
-          navigate("/chathome");
+          navigate("/navbar");
         }, 2000);
         toast.success("Login Successful", {
           position: "top-center",
@@ -183,9 +183,9 @@ const Home = () => {
           <img
             src="Logo.png"
             alt="Logo"
-            className="w-1/2 sm:w-1/3 md:w-1/4 animate-fadeIn mt-10"
+            className="w-1/2 sm:w-1/3 md:w-2/4 animate-fadeIn mt-10"
           />
-          <p className="text-2xl sm:text-3xl mt-4 sm:mt-7 slideIn-delay font-oxanium mb-5 sm:mb-10">
+          <p className="text-3xl sm:text-4xl mt-4 sm:mt-7 slideIn-delay font-oxanium mb-5 sm:mb-10">
             where developers unite
           </p>
           <ToastContainer
@@ -199,17 +199,20 @@ const Home = () => {
           {/* Banner and Form */}
           <div className="flex flex-col lg:flex-row justify-between w-full mt-10 lg:mt-16">
             {/* Banner */}
-            <div className="flex justify-center lg:justify-start w-full lg:w-1/2 lg:pl-12 animate-bounce">
-              <img
-                src="banner.png"
-                alt="Banner"
-                className="w-3/4 md:w-2/3 lg:w-full mt-6 lg:mt-20"
-              />
+            <div className="flex justify-center lg:justify-start w-full lg:w-1/2 lg:pl-12 ">
+              <div>
+                <img
+                  src={darkMode ? "banner-2.png" : "banner-1.png"}
+                  alt="Banner"
+                  className="w-3/4 md:w-2/3 lg:w-full mt-6 lg:mt-20 animate-bounce"
+                />
+                <img src="banner-shadow.png" alt="" />
+              </div>
             </div>
 
             {/* Login / Registration Form */}
             <div
-              className={`w-full lg:w-2/3 max-w-md mx-auto lg:mx-0 shadow-lg rounded-xl p-5 lg:p-8 mt-8 lg:mt-0 bg-opacity-90 ${
+              className={`w-full lg:w-2/3 max-w-md mx-auto lg:mx-0 shadow-lg rounded-xl p-10 mt-8 lg:mt-0 bg-opacity-90 ${
                 darkMode ? "bg-gray-900" : "bg-white"
               }`}
             >
