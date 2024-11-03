@@ -16,6 +16,7 @@ module.exports = withMT({
         fadeIn: "fadeIn 0.3s ease-in-out forwards",
         fadeOut: "fadeOut 0.3s ease-in-out forwards",
         slideIn: "slideIn 0.5s ease-out forwards",
+        "zoom-in-zoom-out": "zoom-in-zoom-out 1s ease infinite",
       },
       keyframes: {
         rotate: {
@@ -34,7 +35,13 @@ module.exports = withMT({
           "0%": { transform: "translateX(-20px)", opacity: "0" },
           "100%": { transform: "translateX(0)", opacity: "1" },
         },
+        "zoom-in-zoom-out": {
+          "0%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.25)" },
+          "100%": { transform: "scale(1)" },
+        },
       },
+
       fontFamily: {
         roboto: ['"Roboto"', "sans-serif"],
         poppins: ['"Poppins"', "sans-serif"],

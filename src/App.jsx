@@ -22,14 +22,12 @@ const router = createBrowserRouter(
 );
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 2500);
     return () => clearTimeout(timer);
   }, []);
-
   return <>{isLoading ? <Loading /> : <RouterProvider router={router} />}</>;
 };
 

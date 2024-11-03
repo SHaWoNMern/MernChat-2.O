@@ -206,7 +206,11 @@ const Home = () => {
                   alt="Banner"
                   className="w-3/4 md:w-2/3 lg:w-full mt-6 lg:mt-20 animate-bounce"
                 />
-                <img src="banner-shadow.png" alt="" />
+                <img
+                  src="banner-shadow.png"
+                  alt="bannershadow"
+                  className="animate-zoom-in-zoom-out pr-5"
+                />
               </div>
             </div>
 
