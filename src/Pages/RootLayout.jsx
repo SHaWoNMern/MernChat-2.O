@@ -12,8 +12,8 @@ const RootLayout = () => {
           darkMode ? "bg-dark-image text-white" : "bg-light-image text-gray-900"
         }`}
       >
-        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
         <Outlet />
+        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
       </div>
     </>
   );

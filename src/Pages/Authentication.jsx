@@ -15,17 +15,19 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
 const Authentication = () => {
   // firebase --------------
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
-
+  const db = getDatabase();
   // react dom ----------------
   const navigate = useNavigate();
   // state---------------------
 
   const [darkMode, setDarkMode] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
@@ -44,6 +46,13 @@ const Authentication = () => {
     setIsRegistering(!isRegistering);
   };
 
+  const handleToggleForm = () => {
+    if (!isRegistering) {
+      setSuccessMessage("");
+    }
+    toggleForm();
+    setIsRegistering(!isRegistering);
+  };
   // form handle functions-----------------------------------
   const validateField = (field, value) => {
     if (field === "email") {
@@ -84,7 +93,7 @@ const Authentication = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setTimeout(() => {
-          navigate("/navbar");
+          navigate("/home");
         }, 2000);
         toast.success("Login Successful", {
           position: "top-center",
@@ -114,8 +123,14 @@ const Authentication = () => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
+        // google realtime database ---------------
+        set(ref(db, "users/" + user.uid), {
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+        });
         setTimeout(() => {
-          navigate("/navbar");
+          navigate("/home");
         }, 2000);
         toast.success("Login Successful", {
           position: "top-center",
@@ -156,7 +171,7 @@ const Authentication = () => {
           })
             .then(() => {
               sendEmailVerification(auth.currentUser);
-              toast.success("Profile Updated", {
+              toast.success({
                 position: "top-center",
                 theme: darkMode ? "dark" : "light",
                 transition: Bounce,
@@ -171,8 +186,19 @@ const Authentication = () => {
               });
             });
           const user = userCredential.user;
+          // google realtime database ---------------
+          const dbRef = ref(db, "users/" + user.uid);
+          set(dbRef, {
+            email: email,
+            name: name,
+            number: number,
+          });
           setTimeout(() => {
-            navigate("/");
+            setSuccessMessage(
+              "Registration successful! Please login to continue."
+            );
+            setIsRegistering(true);
+            toggleForm();
           }, 2000);
           toast.success("Registration Successful", {
             position: "top-center",
@@ -251,8 +277,17 @@ const Authentication = () => {
                 darkMode ? "bg-gray-900" : "bg-white"
               }`}
             >
+              {/* --------------- success massage ----------------- */}
+              {/* Success Message */}
+              {!isRegistering && successMessage && (
+                <div className="text-green-500 text-xl mt-1 mb-2">
+                  {successMessage}
+                </div>
+              )}
+
               <div>
                 {/* Header */}
+
                 <h1
                   className={`text-2xl md:text-3xl font-bold mb-4 sm:mb-6 ${
                     darkMode ? "text-white" : "text-gray-900"
@@ -270,7 +305,7 @@ const Authentication = () => {
                   It's Free to Use
                 </h3>
 
-                {/* Registration Form */}
+                {/* ----------Registration Form------------- */}
                 <div
                   className={`transition-all duration-500 ease-in-out overflow-hidden ${
                     isRegistering

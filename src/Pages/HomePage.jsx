@@ -2,14 +2,14 @@ import React from "react";
 
 const HomePage = () => {
   return (
-    <div className="absolute inset-x-32 inset-y-4">
+    <div className="absolute inset-x-48 inset-y-4">
       <div className="relative w-full h-96 bg-gray-200 rounded-xl">
         {/* Cover Photo */}
         <img
           id="cover-photo"
-          src="default-cover.jpg"
+          src="demo-cover.jpeg"
           alt="Cover Photo"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover overflow-hidden rounded-xl"
         />
         <button
           onclick="uploadCoverPhoto()"
@@ -18,18 +18,18 @@ const HomePage = () => {
           Upload Cover Photo
         </button>
         {/* Profile Photo */}
-        <div className="absolute bottom-0 right-10 transform translate-y-1/2 w-48 h-48 rounded-full border-4 border-white bg-gray-200">
+        <div className="absolute bottom-0 left-20 transform translate-y-2/3 w-64 h-64 rounded-full border-4 border-white bg-gray-200">
           <img
             id="profile-photo"
-            src="default-profile.jpg"
+            src="default-profile.webp"
             alt="Profile Photo"
             className="w-full h-full rounded-full object-cover"
           />
           <button
             onclick="uploadProfilePhoto()"
-            className="absolute bottom-2 right-2 bg-white p-1 rounded-full shadow"
+            className="absolute bottom-4 right-4 bg-white p-1 rounded-full shadow"
           >
-            +
+            <i className="fa-solid fa-camera text-2xl"></i>
           </button>
         </div>
       </div>
