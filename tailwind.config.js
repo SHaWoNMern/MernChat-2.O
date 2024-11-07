@@ -50,7 +50,9 @@ module.exports = withMT({
       },
       backgroundImage: {
         "dark-image": "url('dark-bg.jpg')",
-        "light-image": "url('light-bg.jpg')",
+        "light-image": "url('banner-01.jpg')",
+        "login-bg": "url('light-1.jpg')",
+        "home-bg": "url('light-bg.jpg')",
       },
     },
   },

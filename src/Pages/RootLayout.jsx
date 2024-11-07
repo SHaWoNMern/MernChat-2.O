@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Navbar from "../Component/Navbar";
+import Navbar from "../Component/navbar";
 
 const RootLayout = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -9,7 +9,7 @@ const RootLayout = () => {
     <>
       <div
         className={`flex min-h-screen bg-cover w-full ${
-          darkMode ? "bg-dark-image text-white" : "bg-light-image text-gray-900"
+          darkMode ? "bg-[#121212] text-white" : "bg-home-bg text-gray-900"
         }`}
       >
         <Outlet />

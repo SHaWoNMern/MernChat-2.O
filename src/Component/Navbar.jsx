@@ -59,8 +59,10 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         </button>
 
         {/* ------------------search Icon------------- */}
-        <button className="group navbutton">
-          <SearchButton />
+        <button className="group navbutton ">
+          <div className="hover:animate-rotate">
+            <SearchButton />
+          </div>
           <span className="navspan">Search</span>
         </button>
 

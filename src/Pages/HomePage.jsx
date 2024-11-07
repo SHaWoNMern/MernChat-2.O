@@ -18,7 +18,7 @@ const HomePage = () => {
           Upload Cover Photo
         </button>
         {/* Profile Photo */}
-        <div className="absolute bottom-0 left-20 transform translate-y-2/3 w-64 h-64 rounded-full border-4 border-white bg-gray-200">
+        <div className="absolute bottom-0 left-20 transform translate-y-2/4 w-64 h-64 rounded-full border-4 border-white bg-gray-200">
           <img
             id="profile-photo"
             src="default-profile.webp"
