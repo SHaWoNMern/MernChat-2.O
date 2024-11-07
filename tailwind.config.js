@@ -49,9 +49,8 @@ module.exports = withMT({
         oxanium: ['"Oxanium"', "cursive"],
       },
       backgroundImage: {
-        "dark-image": "url('dark-bg.png')",
-        "light-image": "url('banner-01.jpg')",
-        "nav-dark": "url('nav-dark.jpg')",
+        "dark-image": "url('dark-bg.jpg')",
+        "light-image": "url('light-bg.jpg')",
       },
     },
   },

@@ -12,10 +12,13 @@ import {
   updateProfile,
   sendEmailVerification,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
-const Home = () => {
+const Authentication = () => {
   // firebase --------------
   const auth = getAuth();
+  const provider = new GoogleAuthProvider();
 
   // react dom ----------------
   const navigate = useNavigate();
@@ -102,6 +105,35 @@ const Home = () => {
       setPassword("");
       setErrors({ email: false, password: false });
     }
+  };
+
+  // google login----------------------------------------
+  const handleGoogleLogin = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        setTimeout(() => {
+          navigate("/navbar");
+        }, 2000);
+        toast.success("Login Successful", {
+          position: "top-center",
+          theme: darkMode ? "dark" : "light",
+          transition: Bounce,
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        toast.error(errorMessage, {
+          position: "top-center",
+          theme: darkMode ? "dark" : "light",
+          transition: Bounce,
+        });
+      });
   };
 
   // Registration------------------------------------------------------
@@ -342,11 +374,13 @@ const Home = () => {
                   {isRegistering ? "Sign Up" : "Sign In"}
                 </Button>
                 <hr className="my-6 border-gray-300 w-full" />
+                {/* -----------Google Button------------ */}
                 <Button
                   size="lg"
                   variant="outlined"
                   color="blue-gray"
                   className="flex items-center gap-3 mx-auto"
+                  onClick={handleGoogleLogin}
                 >
                   <img
                     src="https://docs.material-tailwind.com/icons/google.svg"
@@ -405,4 +439,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Authentication;

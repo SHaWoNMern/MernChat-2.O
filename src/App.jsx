@@ -5,18 +5,19 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Home from "./Pages/Home";
+import Authentication from "./Pages/Authentication";
 import RootLayout from "./Pages/RootLayout";
 import Loading from "./Component/Loading";
-import Navbar from "./Component/Navbar";
-import HomePage from "./Pages/HomePAge";
+import HomePage from "./Pages/HomePage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<RootLayout />}>
-      <Route index element={<Home />} />
-      <Route path="/navbar" element={<Navbar />} />
-      <Route path="/homepage" element={<HomePage />} />
+    <Route>
+      <Route path="/" element={<Authentication />} />
+
+      <Route path="/" element={<RootLayout />}>
+        <Route path="/home" element={<HomePage />} />
+      </Route>
     </Route>
   )
 );

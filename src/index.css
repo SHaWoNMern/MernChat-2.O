@@ -71,7 +71,7 @@
     @apply absolute top-14 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-2xl;
   }
   .darkMode {
-    @apply bg-gradient-to-br from-black to-gray-900 hover:bg-gradient-to-br hover:from-gray-900 hover:via-gray-800 hover:to-black;
+    @apply bg-gradient-to-br from-black to-gray-900 hover:bg-gradient-to-br hover:from-gray-900 hover:to-black;
   }
   .lightMode {
     @apply bg-gradient-to-br from-blue-800 to-blue-500 hover:bg-gradient-to-br hover:from-blue-500 hover:to-soft-blue;
