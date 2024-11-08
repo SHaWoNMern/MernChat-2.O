@@ -9,6 +9,7 @@ import Authentication from "./Pages/Authentication";
 import RootLayout from "./Pages/RootLayout";
 import Loading from "./Component/Loading";
 import HomePage from "./Pages/HomePage";
+import User from "./Component/User";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Authentication />} />
 
       <Route path="/" element={<RootLayout />}>
+        <Route path="/user" element={<User />} />
         <Route path="/home" element={<HomePage />} />
       </Route>
     </Route>

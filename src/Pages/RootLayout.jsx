@@ -8,7 +8,7 @@ const RootLayout = () => {
   return (
     <>
       <div
-        className={`flex min-h-screen bg-cover w-full ${
+        className={`flex min-h-screen bg-cover w-full font-poppins items-center ${
           darkMode ? "bg-[#121212] text-white" : "bg-home-bg text-gray-900"
         }`}
       >
