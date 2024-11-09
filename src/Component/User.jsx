@@ -17,15 +17,12 @@ const User = () => {
   }, []);
   console.log(userList);
   return (
-    <div className="w-full max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 font-poppins">
-      <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-        Friends
-      </h2>
+    <div className="flex flex-row flex-wrap w-full rows-3 gap-4 rounded-lg shadow-md p-4">
 
       {userList.map((user) => (
         <div
           key={user.uid}
-          className="flex items-center justify-between p-3 bg-gray-100 dark:bg-gray-700 rounded-lg mb-2"
+          className="flex items-center justify-between p-3 gap-3 bg-gray-100 dark:bg-gray-700 rounded-lg mb-2"
         >
           {/* User Info */}
           <div className="flex items-center">
@@ -35,7 +32,7 @@ const User = () => {
               className="w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-600"
             />
             <div className="ml-3">
-              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+              <h3 className="text-lg font-medium w-36">
                 {user.name}
               </h3>
             </div>
@@ -43,7 +40,7 @@ const User = () => {
 
           {/* Action Buttons */}
           <div className="flex space-x-2">
-            <button className="px-3 py-1 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600">
+            <button className="px-5 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600">
               Add
             </button>
             <button className="px-3 py-1 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-lg shadow hover:bg-gray-400 dark:hover:bg-gray-500">

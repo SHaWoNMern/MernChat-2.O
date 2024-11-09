@@ -9,7 +9,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
     <nav
       className={`${
         darkMode ? "darkMode" : "lightMode"
-      } z-10 my-auto flex flex-col justify-between p-6 w-24 h-auto items-center text-grey-900 font-oxanium rounded-2xl transition-all duration-300 hover:w-36 ml-6`}
+      } z-10 flex flex-col justify-between p-6 w-24 h-auto absolute left-6 top-1/2 transform -translate-y-1/2 items-center  text-grey-900 font-oxanium rounded-2xl transition-all duration-300 hover:w-36`}
     >
       {/* --------------- Profile Section --------------- */}
       <div className="flex flex-col items-center mb-10">

@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react'
 
-const Group = () => {
+const MyGroup = () => {
   return (
     <div className="flex flex-row flex-wrap w-full rows-3 gap-4 rounded-lg shadow-md p-4">
-      Group
+      MyGroup
     </div>
   );
-};
+}
 
-export default Group;
+export default MyGroup

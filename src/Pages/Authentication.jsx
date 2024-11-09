@@ -30,6 +30,7 @@ const Authentication = () => {
   const [isRegistering, setIsRegistering] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [loginError, setLoginError] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
@@ -48,9 +49,10 @@ const Authentication = () => {
   // toggle form-------------------------
   const toggleForm = () => {
     setIsRegistering(!isRegistering);
-    setSuccessMessage("");
     setErrorMessage("");
+    setLoginError("");
   };
+
 
   // form handle functions-----------------------------------
   const validateField = (field, value) => {
@@ -70,6 +72,7 @@ const Authentication = () => {
   };
   const handleChange = (field) => (event) => {
     const value = event.target.value;
+    setLoginError("");
     setErrors((prev) => ({
       ...prev,
       [field]: validateField(field, value),
@@ -92,6 +95,8 @@ const Authentication = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setTimeout(() => {
+          setLoginError("");
+          setSuccessMessage("");
           navigate("/home");
         }, 2000);
         toast.success("Login Successful", {
@@ -102,6 +107,7 @@ const Authentication = () => {
       })
       .catch((error) => {
         const errorMessage = error.message;
+        setLoginError(" Invalid email or password");
         toast.error(errorMessage, {
           position: "top-center",
           theme: darkMode ? "dark" : "light",
@@ -135,6 +141,13 @@ const Authentication = () => {
           })
             .then(() => {
               sendEmailVerification(auth.currentUser);
+              // google realtime database ---------------
+              const dbRef = ref(db, "users/" + user.uid);
+              set(dbRef, {
+                email: email,
+                name: name,
+                number: number,
+              });
               toast.success({
                 position: "top-center",
                 theme: darkMode ? "dark" : "light",
@@ -150,20 +163,14 @@ const Authentication = () => {
               });
             });
           const user = userCredential.user;
-          // google realtime database ---------------
-          const dbRef = ref(db, "users/" + user.uid);
-          set(dbRef, {
-            email: email,
-            name: name,
-            number: number,
-          });
+
           setTimeout(() => {
-            setSuccessMessage(
-              "Registration successful! Please login to continue."
-            );
             setIsRegistering(true);
             toggleForm();
           }, 2000);
+          setSuccessMessage(
+            " Registration successful! Please login to continue."
+          );
           toast.success("Registration Successful", {
             position: "top-center",
             theme: darkMode ? "dark" : "light",
@@ -188,7 +195,7 @@ const Authentication = () => {
             theme: darkMode ? "dark" : "light",
             transition: Bounce,
           });
-          setErrorMessage("Registration failed. Please try again.");
+          setErrorMessage(" Registration failed. Please try again.");
         });
     }
   };
@@ -242,7 +249,7 @@ const Authentication = () => {
             alt="Logo"
             className="w-1/2 sm:w-1/3 md:w-2/4 animate-fadeIn mt-10"
           />
-          <p className="text-3xl sm:text-4xl mt-4 sm:mt-7 slideIn-delay font-oxanium mb-5 sm:mb-10">
+          <p className="text-3xl sm:text-4xl mt-4 sm:mt-7 animate-fadeIn font-oxanium mb-5 sm:mb-10">
             where developers unite
           </p>
           <ToastContainer
@@ -289,15 +296,29 @@ const Authentication = () => {
               >
                 {/* --------------- success massage ----------------- */}
                 {!isRegistering && successMessage && (
-                  <div className="text-green-700 text-xl mt-1 mb-2">
+                  <div className="bg-teal-500 bg-opacity-80 text-white font-bold py-2 px-4 rounded mb-4">
+                    <i className="fa-regular fa-square-check"></i>
                     {successMessage}
                   </div>
                 )}
-                {errorMessage && (
-                  <div className="text-red-500 text-xl mt-1 mb-2">
+                {/* --------------- success massage ----------------- */}
+
+                {/* ----------- error message ---------------- */}
+                {isRegistering && errorMessage && (
+                  <div className="bg-red-500 bg-opacity-80 text-white font-bold py-2 px-4 rounded mb-4">
+                    <i className="fa-solid fa-circle-exclamation"></i>
                     {errorMessage}
                   </div>
                 )}
+                {/* ----------- error message ---------------- */}
+                {/* ------------ login error message ---------------- */}
+                {!isRegistering && loginError && (
+                  <div className="bg-red-500 bg-opacity-80 text-white font-bold py-2 px-4 rounded mb-4">
+                    <i className="fa-solid fa-circle-exclamation"></i>
+                    {loginError}
+                  </div>
+                )}
+                {/* ------------ login error message ---------------- */}
 
                 <div>
                   {/* Header */}
