@@ -10,6 +10,8 @@ import RootLayout from "./Pages/RootLayout";
 import Loading from "./Component/Loading";
 import HomePage from "./Pages/HomePage";
 import User from "./Component/User";
+import Massage from "./Pages/messages";
+import Notifications from "./Pages/Notifications";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +21,8 @@ const router = createBrowserRouter(
       <Route path="/" element={<RootLayout />}>
         <Route path="/user" element={<User />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/messages" element={<Massage />} />
+        <Route path="/notifications" element={<Notifications />} />
       </Route>
     </Route>
   )

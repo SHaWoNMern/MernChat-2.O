@@ -94,7 +94,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
 
         {/* ----------------Logout-------------- */}
         <button className="group navbutton pb-5">
-          <Link to="/logout" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <i className="fas fa-sign-out-alt text-4xl hover:animate-slideIn"></i>
             <span className="navspan">Logout</span>
           </Link>

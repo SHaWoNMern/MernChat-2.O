@@ -4,6 +4,7 @@ import { getDatabase, ref, onValue } from "firebase/database";
 const User = () => {
   const db = getDatabase();
   let [userList, setUserList] = useState([]);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     const userListRef = ref(db, "users");
@@ -17,12 +18,13 @@ const User = () => {
   }, []);
   console.log(userList);
   return (
-    <div className="flex flex-row flex-wrap w-full rows-3 gap-4 rounded-lg shadow-md p-4">
-
+    <div className="flex flex-row flex-wrap w-full gap-4 rounded-lg shadow-md p-4">
       {userList.map((user) => (
         <div
           key={user.uid}
-          className="flex items-center justify-between p-3 gap-3 bg-gray-100 dark:bg-gray-700 rounded-lg mb-2"
+          className={`flex items-center justify-between p-3 gap-3  dark:bg-gray-700 rounded-lg mb-2 ${
+            darkMode ? "bg-gray-800" : "bg-gray-100"
+          }`}
         >
           {/* User Info */}
           <div className="flex items-center">
@@ -32,9 +34,7 @@ const User = () => {
               className="w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-600"
             />
             <div className="ml-3">
-              <h3 className="text-lg font-medium w-36">
-                {user.name}
-              </h3>
+              <h3 className="text-lg font-medium w-36">{user.name}</h3>
             </div>
           </div>
 

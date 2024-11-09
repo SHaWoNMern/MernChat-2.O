@@ -24,7 +24,7 @@ const HomePage = () => {
           <div className="absolute inset-x-20 bottom-0 transform translate-y-2/4 w-64 h-64 rounded-full border-4 border-white bg-gray-200">
             <img
               id="profile-photo"
-              src="default-profile.webp"
+              src="default-profile.png"
               alt="Profile Photo"
               className="w-full h-full rounded-full object-cover"
             />
@@ -47,8 +47,7 @@ const HomePage = () => {
         </div>
         {/* ---------------------------------Nav--------------------------- */}
         <div className=" flex-grow overflow-y-auto">
-
-        <HomeNav />
+          <HomeNav />
         </div>
       </div>
     </div>

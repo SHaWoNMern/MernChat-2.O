@@ -6,6 +6,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Button, Input } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import { FaCheckCircle } from "react-icons/fa";
 
 import {
   getAuth,
@@ -52,7 +53,6 @@ const Authentication = () => {
     setErrorMessage("");
     setLoginError("");
   };
-
 
   // form handle functions-----------------------------------
   const validateField = (field, value) => {
@@ -297,7 +297,7 @@ const Authentication = () => {
                 {/* --------------- success massage ----------------- */}
                 {!isRegistering && successMessage && (
                   <div className="bg-teal-500 bg-opacity-80 text-white font-bold py-2 px-4 rounded mb-4">
-                    <i className="fa-regular fa-square-check"></i>
+                    <FaCheckCircle className="inline" />
                     {successMessage}
                   </div>
                 )}
