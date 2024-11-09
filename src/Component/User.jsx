@@ -18,13 +18,11 @@ const User = () => {
   }, []);
   console.log(userList);
   return (
-    <div className="flex flex-row flex-wrap w-full gap-4 rounded-lg shadow-md p-4">
+    <div className="flex flex-row flex-wrap w-full gap-4 rounded-lg shadow-md p-4 justify-center">
       {userList.map((user) => (
         <div
           key={user.uid}
-          className={`flex items-center justify-between p-3 gap-3  dark:bg-gray-700 rounded-lg mb-2 ${
-            darkMode ? "bg-gray-800" : "bg-gray-100"
-          }`}
+          className={`flex items-center justify-between p-3 gap-3 rounded-lg mb-2 bg-gray-300 hover:bg-blue-gray-400`}
         >
           {/* User Info */}
           <div className="flex items-center">

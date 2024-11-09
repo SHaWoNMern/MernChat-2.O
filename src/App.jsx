@@ -12,6 +12,7 @@ import HomePage from "./Pages/HomePage";
 import User from "./Component/User";
 import Massage from "./Pages/messages";
 import Notifications from "./Pages/Notifications";
+import Setting from "./Pages/Setting";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
         <Route path="/home" element={<HomePage />} />
         <Route path="/messages" element={<Massage />} />
         <Route path="/notifications" element={<Notifications />} />
+        <Route path="/settings" element={<Setting />} />
       </Route>
     </Route>
   )

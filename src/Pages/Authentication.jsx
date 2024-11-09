@@ -108,6 +108,7 @@ const Authentication = () => {
       .catch((error) => {
         const errorMessage = error.message;
         setLoginError(" Invalid email or password");
+        setSuccessMessage("");
         toast.error(errorMessage, {
           position: "top-center",
           theme: darkMode ? "dark" : "light",
@@ -249,7 +250,7 @@ const Authentication = () => {
             alt="Logo"
             className="w-1/2 sm:w-1/3 md:w-2/4 animate-fadeIn mt-10"
           />
-          <p className="text-3xl sm:text-4xl mt-4 sm:mt-7 animate-fadeIn font-oxanium mb-5 sm:mb-10">
+          <p className="text-3xl sm:text-3xl mt-4 sm:mt-7 animate-fadeIn font-oxanium mb-5 sm:mb-10">
             where developers unite
           </p>
           <ToastContainer
@@ -262,7 +263,7 @@ const Authentication = () => {
 
           {/* Banner and Form */}
           <div
-            className={`mt-10 lg:mt-16 border border-gray-300 rounded-xl shadow-md opacity-90 animate-fadeIn px-3
+            className={`mt-5 lg:mt-10 border border-gray-300 rounded-xl shadow-md opacity-90 animate-fadeIn px-3
               ${
                 darkMode
                   ? "bg-gray-900 bg-opacity-50"
@@ -438,8 +439,10 @@ const Authentication = () => {
                   </div>
 
                   {/* Buttons */}
+
                   <Button
                     color="blue"
+                    type="submit"
                     onClick={isRegistering ? handleRegistration : handleLogin}
                     disabled={!email || !password}
                     className="w-full py-3 mt-4 bg-blue-500 text-white font-bold rounded hover:bg-blue-600 focus:outline-none disabled:bg-blue-300"
