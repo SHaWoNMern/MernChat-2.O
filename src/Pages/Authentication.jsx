@@ -18,6 +18,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 const Authentication = () => {
   // firebase --------------
   const auth = getAuth();
@@ -295,7 +296,7 @@ const Authentication = () => {
                     : "bg-blue-50 bg-opacity-30"
                 }`}
               >
-                {/* --------------- success massage ----------------- */}
+                {/* --------------- registration success massage ----------------- */}
                 {!isRegistering && successMessage && (
                   <div className="bg-teal-500 bg-opacity-80 text-white font-bold py-2 px-4 rounded mb-4">
                     <FaCheckCircle className="inline" />
@@ -304,14 +305,15 @@ const Authentication = () => {
                 )}
                 {/* --------------- success massage ----------------- */}
 
-                {/* ----------- error message ---------------- */}
+                {/* ----------- registration error message ---------------- */}
                 {isRegistering && errorMessage && (
                   <div className="bg-red-500 bg-opacity-80 text-white font-bold py-2 px-4 rounded mb-4">
                     <i className="fa-solid fa-circle-exclamation"></i>
                     {errorMessage}
                   </div>
                 )}
-                {/* ----------- error message ---------------- */}
+                {/* ----------- registration error message ---------------- */}
+
                 {/* ------------ login error message ---------------- */}
                 {!isRegistering && loginError && (
                   <div className="bg-red-500 bg-opacity-80 text-white font-bold py-2 px-4 rounded mb-4">
@@ -336,7 +338,7 @@ const Authentication = () => {
                   <h3
                     className={`text-lg md:text-xl mb-5 sm:mb-7 ${
                       darkMode ? "text-gray-300" : "text-gray-700"
-                    } animate-slideIn`}
+                    } animate-slideIn `}
                   >
                     It's Free to Use
                   </h3>
@@ -488,7 +490,7 @@ const Authentication = () => {
                         ? "Switch to Light Mode"
                         : "Switch to Dark Mode"}
                     </span>
-                    <label className="relative inline-flex items-center cursor-pointer">
+                    <label className="relative flex items-center cursor-pointer border-2 border-gray-500 rounded-full">
                       <input
                         type="checkbox"
                         checked={darkMode}
@@ -496,15 +498,21 @@ const Authentication = () => {
                         className="sr-only peer"
                       />
                       <div
-                        className={`w-10 h-5 rounded-full ${
-                          darkMode ? "bg-gray-600" : "bg-gray-200"
-                        }`}
+                        className={`w-10 h-5 rounded-full flex items-center justify-${
+                          darkMode ? "end" : "start"
+                        } transition-colors ${
+                          darkMode ? "bg-gray-900" : "bg-gray-200"
+                        } `}
                       >
                         <div
-                          className={`w-5 h-5 bg-white rounded-full shadow transform transition-transform ${
-                            darkMode ? "translate-x-5" : "translate-x-0"
-                          }`}
-                        ></div>
+                          className={`w-5 h-5 rounded-full shadow-lg transition-transform  ease-in-out flex items-center justify-center `}
+                        >
+                          {darkMode ? (
+                            <MdLightMode className="text-gray-100 text-xl" />
+                          ) : (
+                            <MdDarkMode className="text-black text-xl" />
+                          )}
+                        </div>
                       </div>
                     </label>
                   </div>
