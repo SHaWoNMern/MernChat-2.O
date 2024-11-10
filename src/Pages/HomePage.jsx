@@ -9,7 +9,7 @@ import User from "../Component/User";
 
 const HomePage = () => {
   // Navbar function---------------------------------------
-  const [activeComponent, setActiveComponent] = useState(null);
+  const [activeComponent, setActiveComponent] = useState("userList");
   const handleToggleComponent = (component) => {
     setActiveComponent((prevComponent) =>
       prevComponent === component ? null : component
@@ -66,7 +66,7 @@ const HomePage = () => {
                   <div className="relative">
                     <button
                       onClick={() => handleToggleComponent("userList")}
-                      className="homenav active"
+                      className='homenav'
                     >
                       User List
                     </button>

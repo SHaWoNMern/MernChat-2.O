@@ -29,7 +29,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         {/* ------- Home Icon ---------- */}
         <button className="group navbutton ">
           <Link to="/home" className="flex items-center">
-            <i className="fas fa-home text-4xl hover:animate-rotate"></i>
+            <i className="fas fa-home navicon"></i>
             <span className="navspan">Home</span>
           </Link>
         </button>
@@ -37,7 +37,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         {/* -------------- Messages Icon ------------- */}
         <button className="group navbutton">
           <Link to="/messages" className="flex items-center">
-            <i className="fas fa-comment text-4xl hover:animate-rotate"></i>
+            <i className="fas fa-comment navicon"></i>
             <span className="navspan">Messages</span>
           </Link>
         </button>
@@ -45,7 +45,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         {/* ---------------Notifications Icon with Tooltip-------------------- */}
         <button className="group navbutton">
           <Link to="/notifications" className="flex items-center">
-            <i className="fas fa-bell text-4xl hover:animate-rotate"></i>
+            <i className="fas fa-bell navicon"></i>
             <span className="navspan">Notifications</span>
           </Link>
         </button>
@@ -53,14 +53,14 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         {/* ----------------Settings Icon------------- */}
         <button className="group navbutton">
           <Link to="/settings" className="flex items-center">
-            <i className="fas fa-cog text-4xl hover:animate-rotate"></i>
+            <i className="fas fa-cog navicon"></i>
             <span className="navspan">Settings</span>
           </Link>
         </button>
 
         {/* ------------------search Icon------------- */}
         <button className="group navbutton ">
-          <div className="hover:animate-rotate">
+          <div className="navicon">
             <SearchButton />
           </div>
         </button>
@@ -68,7 +68,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         {/* ----------------Logout-------------- */}
         <button className="group navbutton pb-5">
           <Link to="/" className="flex items-center">
-            <i className="fas fa-sign-out-alt text-4xl hover:animate-slideIn"></i>
+            <i className="fas fa-sign-out-alt navicon"></i>
             <span className="navspan">Logout</span>
           </Link>
         </button>
@@ -87,7 +87,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
               } transition-colors ${darkMode ? "bg-gray-900" : "bg-blue-700"}`}
             >
               <div
-                className={`w-5 h-5 bg-white rounded-full shadow transform transition-transform flex items-center justify-center `}
+                className={`w-5 h-5 bg-gray-200 bg-opacity-50 rounded-full shadow transform transition-transform flex items-center justify-center `}
               >
                 {darkMode ? (
                   <MdLightMode className="text-gray-900 text-xl" />

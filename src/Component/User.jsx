@@ -22,7 +22,7 @@ const User = () => {
       {userList.map((user) => (
         <div
           key={user.uid}
-          className={`flex items-center justify-between p-3 gap-3 rounded-lg mb-2 bg-gray-300 hover:bg-blue-gray-400`}
+          className={`flex items-center justify-between p-3 gap-3 rounded-lg mb-2  bg-opacity-50 shadow-lg  hover:bg-blue-gray-100  transform transition duration-300 ease-in-out cursor-context-menu `}
         >
           {/* User Info */}
           <div className="flex items-center">
