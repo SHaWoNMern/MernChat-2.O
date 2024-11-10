@@ -291,7 +291,7 @@ const Authentication = () => {
               <div
                 className={`w-full lg:w-2/3 max-w-md mx-auto lg:mx-0 shadow-lg rounded-xl p-10 mt-8 lg:mt-0 animate-slideIn ${
                   darkMode
-                    ? "bg-gray-900 bg-opacity-40"
+                    ? "bg-gray-900 bg-opacity-60"
                     : "bg-blue-50 bg-opacity-30"
                 }`}
               >

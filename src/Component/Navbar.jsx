@@ -90,9 +90,9 @@ const Navbar = ({ darkMode, setDarkMode }) => {
                 className={`w-5 h-5 bg-white rounded-full shadow transform transition-transform flex items-center justify-center `}
               >
                 {darkMode ? (
-                  <MdDarkMode className="text-gray-900" />
+                  <MdLightMode className="text-gray-900 text-xl" />
                 ) : (
-                  <MdLightMode className="text-black" />
+                  <MdDarkMode className="text-black text-xl" />
                 )}
               </div>
             </div>

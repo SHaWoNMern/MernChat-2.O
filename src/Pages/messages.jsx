@@ -15,7 +15,7 @@ function messages() {
             onClick={() => setActiveTab("chats")}
             className={`px-4 py-2 ${
               activeTab === "chats"
-                ? "bg-blue-500 text-white rounded-full"
+                ? "bg-[radial-gradient(circle_80px_at_80%_-10%,_#93A0F9,_#3F57F5)] text-white rounded-full"
                 : "text-gray-600"
             }`}
           >
@@ -25,7 +25,7 @@ function messages() {
             onClick={() => setActiveTab("groups")}
             className={`px-4 py-2 ${
               activeTab === "groups"
-                ? "bg-blue-500 text-white rounded-full"
+                ? "bg-[radial-gradient(circle_80px_at_80%_-10%,_#93A0F9,_#3F57F5)] text-white rounded-full"
                 : "text-gray-600"
             }`}
           >

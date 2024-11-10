@@ -65,10 +65,10 @@
 
 @layer components {
   .navbutton {
-    @apply relative flex items-center justify-center rounded-xl py-3 ;
+    @apply relative flex items-center justify-center rounded-xl py-3;
   }
   .navspan {
-    @apply absolute top-2 left-16 opacity-0 group-hover:opacity-100 transition-opacity ease-in duration-500 px-4 py-2 rounded-full bg-blue-gray-800 text-white text-lg;
+    @apply absolute top-2 left-16 opacity-0 group-hover:opacity-100 transition-opacity ease-in duration-500 px-4 py-2 rounded-full bg-[radial-gradient(circle_80px_at_80%_-10%,_#BAB7B7,_#181b1b)] text-white text-lg;
   }
   .darkMode {
     @apply bg-gradient-to-br from-black to-gray-900  hover:text-gray-300 transition duration-200 ease-in-out;
