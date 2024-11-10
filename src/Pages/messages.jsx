@@ -53,7 +53,7 @@ function messages() {
                   <img src="default-profile.png" alt="" />
                 </div>
                 <div className="ml-3">
-                  <h4 className=" font-semibold">
+                  <h4 className=" font-semibold text-gray-900">
                     {/* ------------------User.name--------------------- */}
                     SHaWoN
                   </h4>
@@ -81,28 +81,36 @@ function messages() {
 
       {/* -------------------Chat Area----------------------- */}
       <div className="flex-grow flex flex-col">
-        <header className="p-4 bg-white shadow-md flex items-center">
+        <header className="p-[14px] bg-white shadow-md flex items-center">
           <div className="bg-blue-500 rounded-full h-10 w-10 flex items-center justify-center">
             {/* ------------------ profile picture ------------------ */}
             <img src="default-profile.png" alt="" />
           </div>
           <div className="ml-3">
-            <h2 className="font-semibold">SHaWoN</h2>
+            <h2 className="font-semibold text-gray-900">SHaWoN</h2>
             <p className="text-gray-600 text-sm">Active now</p>
           </div>
         </header>
 
         {/* ----------------Messages Area------------------------ */}
+
+        {/* --------------- Friend message --------------- */}
         <div className="flex-grow p-4 overflow-y-auto">
           <div className="space-y-4">
-            <div className="text-left p-3 bg-gray-300 rounded-lg">
-              {/* --------------- Friend massage --------------- */}
-              <p>Hey! How's it going?</p>
+            <div className="flex justify-start">
+              <div className="p-3 bg-gray-300 rounded-lg inline-block">
+                <p>Hey! How's it going?</p>
+              </div>
             </div>
-            <div className="text-right p-3 bg-blue-400  rounded-lg">
-              {/* ---------------my massage --------------- */}
-              <p>I'm good, thanks! How about you?</p>
+            {/* --------------- Friend message --------------- */}
+
+            {/* --------------- My message --------------- */}
+            <div className="flex justify-end">
+              <div className="p-3 bg-blue-400 rounded-lg inline-block">
+                <p>I'm good, thanks! How about you?</p>
+              </div>
             </div>
+            {/* --------------- My message --------------- */}
           </div>
         </div>
 

@@ -14,7 +14,7 @@ const SearchButton = () => {
 
       {/* Search Box */}
       <div
-        className={`absolute left-10 ml-2 w-56 px-4 flex items-center py-2 border rounded-lg shadow-lg bg-white text-gray-900 transition-all duration-300 ease-in-out
+        className={`absolute left-12 ml-2 w-56 px-4 flex items-center py-2 border rounded-lg shadow-lg bg-white text-gray-900 transition-all duration-300 ease-in-out
           ${
             showSearchBox
               ? "opacity-100 translate-x-0"

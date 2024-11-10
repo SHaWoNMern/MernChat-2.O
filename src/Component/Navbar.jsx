@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { Link } from "react-router-dom";
 import SearchButton from "./SearchButton";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 const Navbar = ({ darkMode, setDarkMode }) => {
   const toggleDarkMode = () => setDarkMode((prevMode) => !prevMode);
@@ -9,10 +10,10 @@ const Navbar = ({ darkMode, setDarkMode }) => {
     <nav
       className={`${
         darkMode ? "darkMode" : "lightMode"
-      } z-10 flex flex-col justify-between p-6 w-24 h-auto absolute left-6 top-1/2 transform -translate-y-1/2 items-center  text-grey-900 font-oxanium rounded-2xl transition-all duration-300 hover:w-36`}
+      } flex flex-col h-auto absolute left-6 top-1/2 transform -translate-y-1/2 justify-between p-4 items-center font-oxanium rounded-2xl`}
     >
       {/* --------------- Profile Section --------------- */}
-      <div className="flex flex-col items-center mb-10">
+      <div className=" mb-6 mt-3">
         <div className="relative">
           <img
             src="dummypp.png"
@@ -21,11 +22,10 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           />
           <span className="absolute top-0 right-0 w-3 h-3 bg-green-500 rounded-full"></span>
         </div>
-        <span className="mt-2 text-lg font-bold">MernChat</span>
       </div>
 
       {/* Nav Items */}
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-5">
         {/* ------- Home Icon ---------- */}
         <button className="group navbutton ">
           <Link to="/home" className="flex items-center">
@@ -63,34 +63,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           <div className="hover:animate-rotate">
             <SearchButton />
           </div>
-          <span className="navspan">Search</span>
         </button>
-
-        {/* ------------------Dark Mode Toggle----------------- */}
-        <div className="mt-6 flex flex-col items-center justify-center">
-          <div className="mb-2 font-bold font-oxanium text-center">
-            {darkMode ? "Light Mode" : "Dark Mode"}
-          </div>
-          <label className="relative flex items-center cursor-pointer">
-            <input
-              type="checkbox"
-              checked={darkMode}
-              onChange={toggleDarkMode}
-              className="sr-only peer"
-            />
-            <div
-              className={`w-10 h-5 rounded-full ${
-                darkMode ? "bg-gray-900" : "bg-blue-700"
-              }`}
-            >
-              <div
-                className={`w-5 h-5 bg-white rounded-full shadow transform transition-transform ${
-                  darkMode ? "translate-x-5" : "translate-x-0"
-                }`}
-              ></div>
-            </div>
-          </label>
-        </div>
 
         {/* ----------------Logout-------------- */}
         <button className="group navbutton pb-5">
@@ -99,6 +72,32 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             <span className="navspan">Logout</span>
           </Link>
         </button>
+        {/* ------------------Dark Mode Toggle----------------- */}
+        <div className="mb-5 flex flex-col items-center justify-center">
+          <label className="relative flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              checked={darkMode}
+              onChange={toggleDarkMode}
+              className="sr-only peer"
+            />
+            <div
+              className={`w-10 h-5 rounded-full flex items-center justify-${
+                darkMode ? "end" : "start"
+              } transition-colors ${darkMode ? "bg-gray-900" : "bg-blue-700"}`}
+            >
+              <div
+                className={`w-5 h-5 bg-white rounded-full shadow transform transition-transform flex items-center justify-center `}
+              >
+                {darkMode ? (
+                  <MdDarkMode className="text-gray-900" />
+                ) : (
+                  <MdLightMode className="text-black" />
+                )}
+              </div>
+            </div>
+          </label>
+        </div>
       </div>
     </nav>
   );

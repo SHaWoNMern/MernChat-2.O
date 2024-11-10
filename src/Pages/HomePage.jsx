@@ -7,7 +7,6 @@ import Blocking from "../Component/blocking";
 import MyGroup from "../Component/MyGroup";
 import User from "../Component/User";
 
-
 const HomePage = () => {
   // Navbar function---------------------------------------
   const [activeComponent, setActiveComponent] = useState(null);
@@ -43,7 +42,7 @@ const HomePage = () => {
             />
             <button
               onclick="uploadProfilePhoto()"
-              className="absolute bottom-4 right-4 bg-white p-1 rounded-full shadow"
+              className="absolute bottom-4 right-4 bg-white text-black p-1 rounded-full shadow"
             >
               <i className="fa-solid fa-camera text-2xl"></i>
             </button>
@@ -67,7 +66,7 @@ const HomePage = () => {
                   <div className="relative">
                     <button
                       onClick={() => handleToggleComponent("userList")}
-                      className="homenav"
+                      className="homenav active"
                     >
                       User List
                     </button>

@@ -65,20 +65,23 @@
 
 @layer components {
   .navbutton {
-    @apply relative flex items-center justify-center dark:hover:text-white rounded-xl py-3 transition-all duration-300;
+    @apply relative flex items-center justify-center rounded-xl py-3 ;
   }
   .navspan {
-    @apply absolute top-14 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-2xl;
+    @apply absolute top-2 left-16 opacity-0 group-hover:opacity-100 transition-opacity ease-in duration-500 px-4 py-2 rounded-full bg-blue-gray-800 text-white text-lg;
   }
   .darkMode {
-    @apply bg-gradient-to-br from-black to-gray-900 hover:bg-gradient-to-br hover:from-gray-900 hover:to-black;
+    @apply bg-gradient-to-br from-black to-gray-900  hover:text-gray-300 transition duration-200 ease-in-out;
   }
   .lightMode {
-    @apply bg-gradient-to-br from-blue-800 to-blue-500 hover:bg-gradient-to-br hover:from-blue-500 hover:to-soft-blue;
+    @apply bg-gradient-to-br from-blue-800 to-blue-500  hover:text-black transition duration-200 ease-in-out;
   }
   .homenav {
     @apply relative px-4 py-2 rounded-lg  hover:text-blue-600 focus:text-blue-600 transition-colors duration-300 font-roboto font-medium
-      after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all after:duration-300
+      after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all after:duration-300;
+  }
+  .settinghover {
+    @apply flex items-center gap-3 px-4 py-2 hover:bg-light-blue hover:shadow-md transition duration-300 ease-in-out rounded-xl cursor-pointer;
   }
 }
 /* -----------------custom Style ------------------ */
