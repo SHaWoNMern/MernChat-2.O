@@ -61,6 +61,21 @@
 }
 /* ---------------Animation--------------------- */
 
+.bg-custom-dark {
+  background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(0, 0, 0, 0.15) 100%
+    ),
+    radial-gradient(
+      at top center,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(0, 0, 0, 0.4) 120%
+    );
+  background-blend-mode: multiply, multiply;
+  background-color: #989898;
+}
+
 /* -----------------custom Style ------------------ */
 
 @layer components {
@@ -74,7 +89,7 @@
     @apply text-3xl hover:scale-110 transition-transform duration-300 ease-in-out opacity-85 hover:opacity-100;
   }
   .darkMode {
-    @apply bg-gradient-to-br from-black to-gray-900  hover:text-gray-300 transition duration-200 ease-in-out;
+    @apply bg-custom-dark  hover:text-gray-300 transition duration-200 ease-in-out;
   }
   .lightMode {
     @apply bg-gradient-to-tl from-[#70a9ff] via-[#20BDFF] to-[#24eeea] transition duration-200 ease-in-out shadow-[0_5px_5px_rgba(0,0,0,0.35),2px_5px_8px_rgba(27,133,219,0.5)];
