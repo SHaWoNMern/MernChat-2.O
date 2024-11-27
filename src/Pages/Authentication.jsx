@@ -7,6 +7,8 @@ import { Button, Input } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { FaCheckCircle } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { setUser } from "../features/userSlice";
 
 import {
   getAuth,
@@ -26,6 +28,7 @@ const Authentication = () => {
   const db = getDatabase();
   // react dom ----------------
   const navigate = useNavigate();
+  const dispach = useDispatch();
   // state---------------------
 
   const [darkMode, setDarkMode] = useState(false);
@@ -37,6 +40,7 @@ const Authentication = () => {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [password, setPassword] = useState("");
+
   const [errors, setErrors] = useState({
     email: false,
     password: false,
@@ -47,6 +51,9 @@ const Authentication = () => {
   // boolean ---------------------------
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
+  const handleForgetPassword = () => {
+    navigate("/forgetPassword");
+  };
 
   // toggle form-------------------------
   const toggleForm = () => {
@@ -98,6 +105,7 @@ const Authentication = () => {
         setTimeout(() => {
           setLoginError("");
           setSuccessMessage("");
+          dispach(setUser(user));
           navigate("/home");
         }, 2000);
         toast.success("Login Successful", {
@@ -440,6 +448,14 @@ const Authentication = () => {
                     )}
                   </div>
 
+                  {/* ----------- forget password ---------------- */}
+                  <div className="flex justify-end"></div>
+                  <button
+                    onClick={handleForgetPassword}
+                    className="text-blue-500 hover:text-blue-600 hover:underline"
+                  >
+                    Forget Password?
+                  </button>
                   {/* Buttons */}
 
                   <Button

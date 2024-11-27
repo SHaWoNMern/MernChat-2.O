@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import {
   createRoutesFromElements,
   createBrowserRouter,
@@ -13,12 +14,13 @@ import User from "./Component/User";
 import Massage from "./Pages/messages";
 import Notifications from "./Pages/Notifications";
 import Setting from "./Pages/Setting";
+import ForgetPassword from "./Pages/forgetPassword";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<Authentication />} />
-
+      <Route path="/forgetPassword" element={<ForgetPassword />} />
       <Route path="/" element={<RootLayout />}>
         <Route path="/user" element={<User />} />
         <Route path="/home" element={<HomePage />} />
