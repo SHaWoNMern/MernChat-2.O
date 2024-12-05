@@ -1,11 +1,28 @@
 import React from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchButton from "./SearchButton";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { getAuth, signOut } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { setUser } from "../features/userSlice";
 
 const Navbar = ({ darkMode, setDarkMode }) => {
   const toggleDarkMode = () => setDarkMode((prevMode) => !prevMode);
+  const auth = getAuth();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        localStorage.setItem("user", null);
+        dispatch(setUser(null));
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log('logout error')
+      });
+  };
   return (
     <nav
       className={`${
@@ -67,10 +84,8 @@ const Navbar = ({ darkMode, setDarkMode }) => {
 
         {/* ----------------Logout-------------- */}
         <button className="group navbutton pb-5">
-          <Link to="/" className="flex items-center">
-            <i className="fas fa-sign-out-alt navicon"></i>
-            <span className="navspan">Logout</span>
-          </Link>
+          <i className="fas fa-sign-out-alt navicon" onClick={handleLogout}></i>
+          <span className="navspan">Logout</span>
         </button>
         {/* ------------------Dark Mode Toggle----------------- */}
         <div className="mb-5 flex flex-col items-center justify-center">

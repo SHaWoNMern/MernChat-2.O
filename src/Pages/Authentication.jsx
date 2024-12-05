@@ -40,7 +40,6 @@ const Authentication = () => {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [password, setPassword] = useState("");
-
   const [errors, setErrors] = useState({
     email: false,
     password: false,
@@ -106,6 +105,7 @@ const Authentication = () => {
           setLoginError("");
           setSuccessMessage("");
           dispach(setUser(user));
+          localStorage.setItem("user", JSON.stringify(user));
           navigate("/home");
         }, 2000);
         toast.success("Login Successful", {
