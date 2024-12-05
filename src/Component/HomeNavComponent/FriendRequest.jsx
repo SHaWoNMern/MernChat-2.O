@@ -8,7 +8,7 @@ const FriendRequest = () => {
   const db = getDatabase();
   const [friendRequestList, setFriendRequestList] = useState([]);
   useEffect(() => {
-    const FriendRequestListRef = ref(db, "friendRequest");
+    const FriendRequestListRef = ref(db, "friendRequest/");
     onValue(FriendRequestListRef, (snapshot) => {
       const array = [];
       snapshot.forEach((item) => {

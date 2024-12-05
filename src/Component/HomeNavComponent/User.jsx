@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { getDatabase, ref, onValue, set, push } from "firebase/database";
 import { useSelector } from "react-redux";
-import { initializeRequestStatus } from "../function/initializeRequestStatus";
 
 const User = () => {
   const db = getDatabase();
   const [userList, setUserList] = useState([]);
   const [sentRequests, setSentRequests] = useState({});
-  const [receivedRequests, setReceivedRequests] = useState([]);
+  const [receivedRequests, setReceivedRequests] = useState({});
   const data = useSelector((state) => state.user.value);
 
   const handleFriendRequest = (user) => {
     if (data?.uid !== user.uid && !sentRequests[user.uid]) {
-      // Check if the friend request is already sent
       push(ref(db, "friendRequest/"), {
         senderid: data.uid,
         sendername: data.displayName,
@@ -20,7 +18,7 @@ const User = () => {
         receivername: user.name,
       })
         .then(() => {
-          setSentRequests((prev) => ({ ...prev, [user.uid]: true })); // Mark request as sent
+          setSentRequests({ ...sentRequests, [user.uid]: true });
         })
         .catch((error) => {
           console.error("Error sending friend request:", error);
@@ -42,41 +40,24 @@ const User = () => {
     });
   }, [data?.uid, db]);
 
-  // Fetch friend requests
+  // Fetch sent and received friend requests
   useEffect(() => {
-    const userListRef = ref(db, "friendRequest/");
-    onValue(userListRef, (snapshot) => {
-      const sentArray = {};
-      const receivedArray = [];
+    const friendRequestRef = ref(db, "friendRequest/");
+    onValue(friendRequestRef, (snapshot) => {
+      const sent = {};
+      const received = {};
       snapshot.forEach((item) => {
         const request = item.val();
         if (request.senderid === data?.uid) {
-          sentArray[request.receiverid] = true; // Track sent requests
+          sent[request.receiverid] = true;
         } else if (request.receiverid === data?.uid) {
-          receivedArray.push(request.senderid); // Track received requests
+          received[request.senderid] = true;
         }
       });
-      setSentRequests(sentArray);
-      setReceivedRequests(receivedArray);
+      setSentRequests(sent);
+      setReceivedRequests(received);
     });
   }, [data?.uid, db]);
-
-  console.log(receivedRequests);
-
-  // useEffect(() => {
-  //   const fetchRequestStatus = async () => {
-  //     if (userList.length > 0 && data?.uid) {
-  //       const updatedSentRequests = await initializeRequestStatus(
-  //         db,
-  //         userList,
-  //         data.uid
-  //       );
-  //       setSentRequests(updatedSentRequests);
-  //     }
-  //   };
-
-  //   fetchRequestStatus();
-  // }, [userList, db, data?.uid]);
 
   return (
     <div className="flex flex-row flex-wrap w-full gap-4 rounded-lg shadow-md p-4 justify-center">
@@ -100,13 +81,17 @@ const User = () => {
             <button
               onClick={() => handleFriendRequest(user)}
               className={`px-5 py-2 rounded-lg shadow ${
-                sentRequests[user.uid]
-                  ? "bg-gray-400 text-white cursor-not-allowed"
-                  : "bg-blue-500 text-white hover:bg-blue-600"
+                sentRequests[user.uid] || receivedRequests[user.uid]
+                  ? "bg-gray-300 cursor-not-allowed"
+                  : "bg-blue-500 text-white"
               }`}
-              disabled={sentRequests[user.uid]}
+              disabled={sentRequests[user.uid] || receivedRequests[user.uid]}
             >
-              {sentRequests[user.uid] ? "Sent" : "Add"}
+              {sentRequests[user.uid]
+                ? "Request Sent"
+                : receivedRequests[user.uid]
+                ? "Request Received"
+                : "Add Friend"}
             </button>
           </div>
         </div>
