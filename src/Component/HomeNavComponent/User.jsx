@@ -7,6 +7,8 @@ const User = () => {
   const [userList, setUserList] = useState([]);
   const [sentRequests, setSentRequests] = useState({});
   const [receivedRequests, setReceivedRequests] = useState({});
+  const [friends, setFriends] = useState({});
+  const [blockedUsers, setBlockedUsers] = useState({});
   const data = useSelector((state) => state.user.value);
 
   const handleFriendRequest = (user) => {
@@ -26,7 +28,7 @@ const User = () => {
     }
   };
 
-  // Fetch user list
+  // Fetch user list--------------
   useEffect(() => {
     const userListRef = ref(db, "users/");
     onValue(userListRef, (snapshot) => {
@@ -40,7 +42,7 @@ const User = () => {
     });
   }, [data?.uid, db]);
 
-  // Fetch sent and received friend requests
+  // Fetch sent and received friend requests--------------
   useEffect(() => {
     const friendRequestRef = ref(db, "friendRequest/");
     onValue(friendRequestRef, (snapshot) => {
@@ -56,6 +58,40 @@ const User = () => {
       });
       setSentRequests(sent);
       setReceivedRequests(received);
+    });
+  }, [data?.uid, db]);
+
+  // Fetch friends list-------------
+  useEffect(() => {
+    const friendsRef = ref(db, "friend/");
+    onValue(friendsRef, (snapshot) => {
+      const friendsMap = {};
+      snapshot.forEach((item) => {
+        const friend = item.val();
+        if (friend.senderid === data?.uid) {
+          friendsMap[friend.receiverid] = true;
+        } else if (friend.receiverid === data?.uid) {
+          friendsMap[friend.senderid] = true;
+        }
+      });
+      setFriends(friendsMap);
+    });
+  }, [data?.uid, db]);
+
+  // Fetch blocked users---------
+  useEffect(() => {
+    const blockedUsersRef = ref(db, "blockList/");
+    onValue(blockedUsersRef, (snapshot) => {
+      const blocked = {};
+      snapshot.forEach((item) => {
+        const block = item.val();
+        if (block.blockbyid === data?.uid) {
+          blocked[block.blockedid] = true;
+        } else if (block.blockedid === data?.uid) {
+          blocked[block.blockbyid] = true;
+        }
+      });
+      setBlockedUsers(blocked);
     });
   }, [data?.uid, db]);
 
@@ -81,13 +117,26 @@ const User = () => {
             <button
               onClick={() => handleFriendRequest(user)}
               className={`px-5 py-2 rounded-lg shadow ${
-                sentRequests[user.uid] || receivedRequests[user.uid]
-                  ? "bg-gray-300 cursor-not-allowed"
+                blockedUsers[user.uid]
+                  ? "bg-red-500 text-white cursor-not-allowed"
+                  : friends[user.uid]
+                  ? "bg-green-500"
+                  : sentRequests[user.uid] || receivedRequests[user.uid]
+                  ? "bg-gray-300"
                   : "bg-blue-500 text-white"
               }`}
-              disabled={sentRequests[user.uid] || receivedRequests[user.uid]}
+              disabled={
+                blockedUsers[user.uid] ||
+                friends[user.uid] ||
+                sentRequests[user.uid] ||
+                receivedRequests[user.uid]
+              }
             >
-              {sentRequests[user.uid]
+              {blockedUsers[user.uid]
+                ? "Blocked" //
+                : friends[user.uid]
+                ? "Friend"
+                : sentRequests[user.uid]
                 ? "Request Sent"
                 : receivedRequests[user.uid]
                 ? "Request Received"

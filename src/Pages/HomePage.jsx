@@ -9,6 +9,7 @@ import User from "../Component/HomeNavComponent/User";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { setUser } from "../features/userSlice";
 
 const HomePage = () => {
   // Navbar function---------------------------------------
@@ -56,7 +57,7 @@ const HomePage = () => {
               className="w-full h-full object-cover overflow-hidden rounded-xl"
             />
             <button
-              onclick="uploadCoverPhoto()"
+              onClick="uploadCoverPhoto()"
               className="absolute top-2 right-2 bg-white p-2 rounded shadow"
             >
               Upload Cover Photo
@@ -70,7 +71,7 @@ const HomePage = () => {
                 className="w-full h-full rounded-full object-cover"
               />
               <button
-                onclick="uploadProfilePhoto()"
+                onClick="uploadProfilePhoto()"
                 className="absolute bottom-4 right-4 bg-white text-black p-1 rounded-full shadow"
               >
                 <i className="fa-solid fa-camera text-2xl"></i>
@@ -121,6 +122,14 @@ const HomePage = () => {
                     </div>
                     <div className="relative">
                       <button
+                        onClick={() => handleToggleComponent("blockedUser")}
+                        className="homenav"
+                      >
+                        Blocked User
+                      </button>
+                    </div>
+                    <div className="relative">
+                      <button
                         onClick={() => handleToggleComponent("groupList")}
                         className="homenav"
                       >
@@ -133,14 +142,6 @@ const HomePage = () => {
                         className="homenav"
                       >
                         My Group
-                      </button>
-                    </div>
-                    <div className="relative">
-                      <button
-                        onClick={() => handleToggleComponent("blockedUser")}
-                        className="homenav"
-                      >
-                        Blocked User
                       </button>
                     </div>
                   </nav>
