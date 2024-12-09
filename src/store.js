@@ -1,9 +1,11 @@
+import msgReducer from "./features/msgSlice";
+import userReducer from "./features/userSlice";
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "./features/userSlice";
 
 export const store = configureStore({
   reducer: {
-    user: userSlice,
+    user: userReducer,
+    msg: msgReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
