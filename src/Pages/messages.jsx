@@ -14,26 +14,26 @@ import { TbSend } from "react-icons/tb";
 import { msgInfo } from "../features/msgSlice";
 import EmojiPicker from "emoji-picker-react";
 
-const Messages = () => {
-  const [activeTab, setActiveTab] = useState("chats");
-  const [activeFriend, setActiveFriend] = useState(null);
-  const [lastMessages, setLastMessages] = useState({});
-  const [Message, setMessage] = useState("");
-  const [msgList, setMsgList] = useState([]);
-  const [isInputInvalid, setIsInputInvalid] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+let Messages = () => {
+  let [activeTab, setActiveTab] = useState("chats");
+  let [activeFriend, setActiveFriend] = useState(null);
+  let [Message, setMessage] = useState("");
+  let [msgList, setMsgList] = useState([]);
+  let [isInputInvalid, setIsInputInvalid] = useState(false);
+  let [isOpen, setIsOpen] = useState(false);
+  let [searchQuery, setSearchQuery] = useState("");
 
-  const data = useSelector((state) => state.user.value);
-  const msgData = useSelector((state) => state.msg?.value || null);
-  const db = getDatabase();
-  const [friendList, setFriendList] = useState([]);
-  const msgListDispatch = useDispatch();
+  let data = useSelector((state) => state.user.value);
+  let msgData = useSelector((state) => state.msg?.value || null);
+  let db = getDatabase();
+  let [friendList, setFriendList] = useState([]);
+  let msgListDispatch = useDispatch();
 
   // Fetch user list--------------
   useEffect(() => {
-    const FriendListRef = ref(db, "friend");
+    let FriendListRef = ref(db, "friend");
     onValue(FriendListRef, (snapshot) => {
-      const array = [];
+      let array = [];
       snapshot.forEach((item) => {
         if (
           data.uid === item.val().receiverid ||
@@ -46,35 +46,13 @@ const Messages = () => {
     });
   }, [data.uid, db]);
 
-  // Fetch last messages for each friend
-  useEffect(() => {
-    const messagesRef = ref(db, "messages/");
-    onValue(messagesRef, (snapshot) => {
-      const messages = {};
-      snapshot.forEach((item) => {
-        const messageData = item.val();
-        const friendKey =
-          messageData.senderId === data.uid
-            ? messageData.receiverId
-            : messageData.senderId;
-        if (
-          !messages[friendKey] ||
-          messages[friendKey].timestamp < messageData.timestamp
-        ) {
-          messages[friendKey] = messageData;
-        }
-      });
-      setLastMessages(messages);
-    });
-  }, [db, data.uid]);
-
   // Fetch messages for each friend
   useEffect(() => {
-    const messagesRef = ref(db, "messages/");
+    let messagesRef = ref(db, "messages/");
     onValue(messagesRef, (snapshot) => {
-      const messages = [];
+      let messages = [];
       snapshot.forEach((item) => {
-        const messageData = item.val();
+        let messageData = item.val();
         if (
           messageData.senderId === data.uid ||
           messageData.receiverId === data.uid
@@ -90,9 +68,9 @@ const Messages = () => {
 
   useEffect(() => {
     {
-      const groupsRef = ref(db, "groups/");
+      let groupsRef = ref(db, "groups/");
       onValue(groupsRef, (snapshot) => {
-        const groupsArray = [];
+        let groupsArray = [];
         snapshot.forEach((item) => {
           if (data.uid == item.val().createdBy.id) {
             groupsArray.push({ id: item.key, ...item.val() });
@@ -126,7 +104,7 @@ const Messages = () => {
       alert("Select A User");
     }
   };
-  const handleKeyDown = (e) => {
+  let handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       handleMassage();
@@ -147,26 +125,33 @@ const Messages = () => {
     );
   };
   // emoji picker
-  const toggleEmojiPicker = () => {
+  let toggleEmojiPicker = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleEmojiSelect = (emoji) => {
+  let handleEmojiSelect = (emoji) => {
     setMessage((prevMessage) => prevMessage + emoji.emoji);
   };
 
   // search =======
   let handleSearch = (e) => {
-    let searchResult = msgList.filter((item) =>
-      item.Message.includes(e.target.value)
+    let filteredMessages = friendList.filter(
+      (item) =>
+        item.receivername.includes(e.target.value) ||
+        item.sendername.includes(e.target.value)
     );
-    console.log(searchResult);
+    setSearchQuery(filteredMessages);
   };
 
   return (
     <div className="flex h-screen bg-gray-100 w-3/4 rounded-lg">
       {/* ------------------------------ Sidebar Container ------------------------------ */}
       <div className="w-80 bg-white shadow-md flex flex-col">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-800 p-4">
+            {data.displayName}{" "}
+          </h2>
+        </div>
         {/* --------Tab Navigation----------- */}
         <div className="p-4 border-b flex justify-between">
           <button
@@ -206,35 +191,59 @@ const Messages = () => {
         <div className="flex-grow overflow-y-auto p-4">
           {activeTab === "chats" && (
             <ul className="space-y-4">
-              {friendList.map((user) => (
-                <li
-                  key={user.uid}
-                  onClick={() => handleUserClick(user)}
-                  className={`flex items-center p-3 hover:bg-gray-200 cursor-pointer rounded-lg ${
-                    activeFriend?.uid === user.uid ? "bg-blue-100" : ""
-                  }`}
-                >
-                  <div className="bg-blue-500 rounded-full h-10 w-10 flex items-center justify-center">
-                    {/* -------------------User.ProfilePicture--------------------- */}
-                    <img src="default-profile.png" alt="" />
-                  </div>
-                  <div className="ml-3">
-                    <h4 className=" font-semibold text-gray-900">
-                      {/* ------------------User.name--------------------- */}
-                      {data.uid === user.senderid
-                        ? user.receivername
-                        : user.sendername}
-                    </h4>
-                    <p className="text-gray-600 text-sm w-40">
-                      {lastMessages[
-                        user.senderid === data.uid
-                          ? user.receiverid
-                          : user.senderid
-                      ]?.message || "No messages yet"}
-                    </p>
-                  </div>
-                </li>
-              ))}
+              {searchQuery.length > 0
+                ? searchQuery.map((user) => (
+                    <li
+                      key={user.uid}
+                      onClick={() => handleUserClick(user)}
+                      className={`flex items-center p-3 hover:bg-gray-200 cursor-pointer rounded-lg ${
+                        activeFriend?.uid === user.uid ? "bg-blue-100" : ""
+                      }`}
+                    >
+                      <div className="bg-blue-500 rounded-full h-10 w-10 flex items-center justify-center">
+                        {/* -------------------User.ProfilePicture--------------------- */}
+                        <img src="default-profile.png" alt="" />
+                      </div>
+                      <div className="ml-3">
+                        <h4 className="font-semibold text-gray-900">
+                          {/* ------------------User.name--------------------- */}
+                          {data.uid === user.senderid
+                            ? user.receivername
+                            : user.sendername}
+                        </h4>
+                        <p className="text-gray-600 text-sm w-40">
+                          {lastMessages[
+                            user.senderid === data.uid
+                              ? user.receiverid
+                              : user.senderid
+                          ]?.message || "No messages yet"}
+                        </p>
+                      </div>
+                    </li>
+                  ))
+                : friendList.map((user) => (
+                    <li
+                      key={user.uid}
+                      onClick={() => handleUserClick(user)}
+                      className={`flex items-center p-3 hover:bg-gray-200 cursor-pointer rounded-lg ${
+                        activeFriend?.uid === user.uid ? "bg-blue-100" : ""
+                      }`}
+                    >
+                      <div className="bg-blue-500 rounded-full h-10 w-10 flex items-center justify-center">
+                        {/* -------------------User.ProfilePicture--------------------- */}
+                        <img src="default-profile.png" alt="" />
+                      </div>
+                      <div className="ml-3">
+                        <h4 className="font-semibold text-gray-900">
+                          {/* ------------------User.name--------------------- */}
+                          {data.uid === user.senderid
+                            ? user.receivername
+                            : user.sendername}
+                        </h4>
+                        <p className="text-gray-600 text-sm w-40">Active Now</p>
+                      </div>
+                    </li>
+                  ))}
             </ul>
           )}
           {activeTab === "groups" && (

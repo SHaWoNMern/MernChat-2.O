@@ -244,6 +244,13 @@ const Authentication = () => {
       });
   };
 
+  // enter key---------------------------------------------
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
+  };
+
   return (
     <>
       {/* ---------------- header --------------- */}
@@ -368,6 +375,7 @@ const Authentication = () => {
                           id="name"
                           value={name}
                           onChange={handleChange("name")}
+                          onKeyDown={handleKeyPress}
                           error={errors.name}
                           size="lg"
                         />
@@ -386,6 +394,7 @@ const Authentication = () => {
                           id="number"
                           value={number}
                           onChange={handleChange("number")}
+                          onKeyDown={handleKeyPress}
                           error={errors.number}
                           size="lg"
                         />
@@ -407,6 +416,7 @@ const Authentication = () => {
                       id="email"
                       value={email}
                       onChange={handleChange("email")}
+                      onKeyDown={handleKeyPress}
                       error={errors.email}
                       size="lg"
                     />
@@ -425,6 +435,7 @@ const Authentication = () => {
                       id="password"
                       value={password}
                       onChange={handleChange("password")}
+                      onKeyDown={handleKeyPress}
                       error={errors.password}
                       size="lg"
                     />
@@ -492,6 +503,9 @@ const Authentication = () => {
                     </span>
                     <button
                       onClick={toggleForm}
+                      onKeyUp={handleKeyPress}
+                      on
+                      onKeyDown={handleKeyPress}
                       type="button"
                       className="text-blue-500 hover:p-1 hover:bg-blue-gray-200 hover:text-white hover:rounded"
                     >

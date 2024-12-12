@@ -10,10 +10,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { setUser } from "../features/userSlice";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const HomePage = () => {
   // Navbar function---------------------------------------
   const [activeComponent, setActiveComponent] = useState("userList");
+  const [profilePhoto, setProfilePhoto] = useState("default-profile.png");
+  const [coverPhoto, setCoverPhoto] = useState("demo-cover.jpeg");
+
   const handleToggleComponent = (component) => {
     setActiveComponent(component);
   };
@@ -22,6 +26,44 @@ const HomePage = () => {
   const data = useSelector((state) => state.user.value);
   const navigate = useNavigate();
   const auth = getAuth();
+  const handleFileUpload = (file, path, setState) => {
+    const storage = getStorage();
+    const storageRef = ref(storage, path);
+
+    uploadBytes(storageRef, file).then((snapshot) => {
+      console.log("Uploaded a blob or file!");
+      getDownloadURL(snapshot.ref).then((downloadURL) => {
+        setState(downloadURL);
+        console.log("File available at", downloadURL);
+      });
+    });
+  };
+
+  const uploadProfilePhoto = () => {
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
+    fileInput.onchange = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        handleFileUpload(file, `profile_photos/${data.uid}`, setProfilePhoto);
+      }
+    };
+    fileInput.click();
+  };
+
+  const uploadCoverPhoto = () => {
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
+    fileInput.onchange = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        handleFileUpload(file, `cover_photos/${data.uid}`, setCoverPhoto);
+      }
+    };
+    fileInput.click();
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -52,12 +94,12 @@ const HomePage = () => {
             {/* Cover Photo */}
             <img
               id="cover-photo"
-              src="demo-cover.jpeg"
+              src={coverPhoto}
               alt="Cover Photo"
               className="w-full h-full object-cover overflow-hidden rounded-xl"
             />
             <button
-              onClick="uploadCoverPhoto()"
+              onClick={uploadCoverPhoto}
               className="absolute top-2 right-2 bg-white p-2 rounded shadow"
             >
               Upload Cover Photo
@@ -66,12 +108,12 @@ const HomePage = () => {
             <div className="absolute inset-x-20 bottom-0 transform translate-y-2/4 w-64 h-64 rounded-full border-4 border-white bg-gray-200">
               <img
                 id="profile-photo"
-                src="default-profile.png"
+                src={profilePhoto}
                 alt="Profile Photo"
                 className="w-full h-full rounded-full object-cover"
               />
               <button
-                onClick="uploadProfilePhoto()"
+                onClick={uploadProfilePhoto}
                 className="absolute bottom-4 right-4 bg-white text-black p-1 rounded-full shadow"
               >
                 <i className="fa-solid fa-camera text-2xl"></i>
@@ -82,7 +124,6 @@ const HomePage = () => {
               <div className="flex items-center">
                 <div className="ml-2">
                   <h2 className="text-3xl font-semibold">
-                    {" "}
                     {data && data.displayName}
                   </h2>
                   <p className="text-xl">{data && data.email}</p>
